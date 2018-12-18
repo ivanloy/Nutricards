@@ -1,5 +1,5 @@
-package com.ivanloy.nutricards.game_elements;
+package com.ivanloy.nutricards.gameelements
 
-public enum FoodCardTypes {
+enum class FoodCardTypes {
     BLANK, SWEET, MEAT, FISH, FORK, DAIRY, FRUIT, VEGETABLE, PASTA, CEREAL
 }
