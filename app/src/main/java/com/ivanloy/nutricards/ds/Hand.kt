@@ -6,7 +6,7 @@ class Hand<T>: Cloneable {
         private set
 
     constructor(hand : Hand<T>){
-        this.handList = hand.handList
+        this.handList = hand.handList.toMutableList();
     }
 
     constructor(vararg cards : T){
