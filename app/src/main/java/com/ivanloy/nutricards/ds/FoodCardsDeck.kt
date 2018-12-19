@@ -1,5 +1,6 @@
 package com.ivanloy.nutricards.ds
 
+import com.ivanloy.nutricards.controllers.GameController
 import com.ivanloy.nutricards.gamedata.FoodCardTypes
 import com.ivanloy.nutricards.gamedata.FoodCardsDeckComposition
 import com.ivanloy.nutricards.gamedata.NumPlayers

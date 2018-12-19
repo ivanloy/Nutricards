@@ -1,5 +1,5 @@
 package com.ivanloy.nutricards.gamedata
 
-enum class NumPlayers {
-    TWO_PLAYERS
+enum class NumPlayers(val nPlayers: Int) {
+    TWO_PLAYERS(2)
 }
