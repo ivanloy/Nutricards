@@ -26,6 +26,10 @@ public class Stequeue<T>{ //TODO Iterator, doc, refactor, invertir push/draw/enq
 
     }
 
+    public void clean(){
+        queue = (T[]) new Object[2];
+    }
+
     public int size() { return size; }
 
 

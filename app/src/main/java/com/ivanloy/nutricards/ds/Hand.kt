@@ -13,6 +13,16 @@ class Hand<T>: Cloneable {
         handList = cards.toMutableList()
     }
 
+    fun peekCard(index : Int) : T{
+        return handList[index]
+    }
+
+    fun removeCard(vararg cards: T){
+        cards.forEach {
+            handList.remove(it)
+        }
+    }
+
     fun size(): Int {
         return handList.size
     }

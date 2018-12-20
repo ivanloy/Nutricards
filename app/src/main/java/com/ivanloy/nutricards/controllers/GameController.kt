@@ -7,20 +7,41 @@ import com.ivanloy.nutricards.gameelements.FoodCard
 
 class GameController private constructor(
         var deck : FoodCardsDeck,
-        var hands : MutableList< Hand < FoodCard >>,
-        var numPlayers: NumPlayers)
+        var hands : MutableList< Hand< FoodCard >>,
+        var numPlayers : NumPlayers,
+        var board : Hand< FoodCard >) : GameControllerI
 {
 
     var currentPlayer : Int = 0
         private set
 
-    fun nextPlayer(){
+    override fun getBoardCard(index: Int) : FoodCard {
+        return board.peekCard(index)
+    }
+
+    override fun nextPlayer(){
         if(currentPlayer == numPlayers.nPlayers - 1) currentPlayer = 0 else currentPlayer++
     }
 
-    fun drawCardToCurrentPlayerHand(){
+    override fun drawCardToCurrentPlayerHand(){
         hands[currentPlayer]
                 .addCard(deck.drawCard())
+    }
+
+    override fun fillBoard(){
+        board = Hand()
+        repeat(numPlayers.nPlayers){
+            board.addCard(deck.drawCard())
+        }
+    }
+
+    override fun getCurrentPlayerHand(): Hand<FoodCard> {
+        return hands[currentPlayer]
+    }
+
+    override fun drawCardFromBoardToCurrentPlayerHand(card : FoodCard){
+        board.removeCard(card)
+        hands[currentPlayer].addCard(card)
     }
 
     data class Builder(val numPlayers: NumPlayers = NumPlayers.TWO_PLAYERS) {
@@ -43,7 +64,7 @@ class GameController private constructor(
                 apply { buildDeck(numPlayers) }
                         .apply { buildHands(numPlayers) }
 
-        fun build() = GameController(deck, hands, numPlayers)
+        fun build() = GameController(deck, hands, numPlayers, Hand())
 
     }
 

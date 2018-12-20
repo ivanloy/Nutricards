@@ -30,6 +30,7 @@ dependencies {
     annotationProcessor 'androidx.lifecycle:lifecycle-compiler:2.1.0-alpha01'
     implementation "org.jetbrains.kotlin:kotlin-stdlib-jdk7:$kotlin_version"
     implementation 'androidx.cardview:cardview:1.0.0'
+    apply plugin: 'kotlin-android-extensions'
 }
 repositories {
     mavenCentral()

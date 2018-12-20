@@ -34,6 +34,7 @@ class FoodCardsDeck : Stequeue<FoodCard>() {
 
     fun buildInitialDeck(numPlayers: NumPlayers){
 
+        clean()
         if(numPlayers == NumPlayers.TWO_PLAYERS){
             this.buildTwoPlayersDeck()
         }
