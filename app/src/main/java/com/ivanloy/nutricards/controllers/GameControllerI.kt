@@ -14,5 +14,6 @@ interface GameControllerI {
     fun drawCardFromBoardToCurrentPlayerHand(card : FoodCard)
     fun getCurrentPlayerHand() : Hand<FoodCard>
     fun getBoardCard(index : Int) : FoodCard
+    fun drawCardFromBoardToCurrentPlayerHand(index : Int)
 
 }

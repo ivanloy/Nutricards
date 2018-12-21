@@ -5,12 +5,24 @@ import com.ivanloy.nutricards.ds.Hand
 import com.ivanloy.nutricards.gamedata.NumPlayers
 import com.ivanloy.nutricards.gameelements.FoodCard
 
-class GameController private constructor(
-        var deck : FoodCardsDeck,
-        var hands : MutableList< Hand< FoodCard >>,
-        var numPlayers : NumPlayers,
-        var board : Hand< FoodCard >) : GameControllerI
+class GameController(val numPlayers: NumPlayers = NumPlayers.DEFAULT) : GameControllerI
 {
+
+
+    var deck : FoodCardsDeck
+    var hands : MutableList< Hand< FoodCard >>
+    var board : Hand< FoodCard >
+
+    init {
+
+        deck = FoodCardsDeck()
+        hands = ArrayList()
+        board = Hand()
+
+        buildDeck()
+        buildHands()
+
+    }
 
     var currentPlayer : Int = 0
         private set
@@ -44,28 +56,19 @@ class GameController private constructor(
         hands[currentPlayer].addCard(card)
     }
 
-    data class Builder(val numPlayers: NumPlayers = NumPlayers.TWO_PLAYERS) {
+    override fun drawCardFromBoardToCurrentPlayerHand(index : Int){
+        val card : FoodCard = board.removeCardWithPosition(index)
+        hands[currentPlayer].addCard(card)
+    }
 
-        private val deck : FoodCardsDeck = FoodCardsDeck()
-        private val hands : MutableList< Hand < FoodCard >> = ArrayList()
-
-        private fun buildDeck(numPlayers: NumPlayers) : FoodCardsDeck =
-                deck.apply { buildInitialDeck(numPlayers)}
-                        .apply { shuffle() }
+    fun buildDeck() : FoodCardsDeck =
+            deck.apply { buildInitialDeck(numPlayers)}
 
 
-        private fun buildHands(numPlayers: NumPlayers){
-            repeat(numPlayers.nPlayers){
-                hands.add(Hand())
-            }
+    fun buildHands(){
+        repeat(numPlayers.nPlayers){
+            hands.add(Hand())
         }
-
-        fun numPlayers(numPlayers: NumPlayers) =
-                apply { buildDeck(numPlayers) }
-                        .apply { buildHands(numPlayers) }
-
-        fun build() = GameController(deck, hands, numPlayers, Hand())
-
     }
 
 }

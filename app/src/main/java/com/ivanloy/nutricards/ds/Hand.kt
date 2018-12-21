@@ -1,38 +1,46 @@
 package com.ivanloy.nutricards.ds
 
+import com.ivanloy.nutricards.gameelements.FoodCard
+
 class Hand<T>: Cloneable {
 
-    var handList: MutableList<T> = ArrayList()
+    var cardList: MutableList<T> = ArrayList()
         private set
 
     constructor(hand : Hand<T>){
-        this.handList = hand.handList.toMutableList();
+        this.cardList = hand.cardList.toMutableList();
     }
 
     constructor(vararg cards : T){
-        handList = cards.toMutableList()
+        cardList = cards.toMutableList()
     }
 
     fun peekCard(index : Int) : T{
-        return handList[index]
+        return cardList[index]
     }
 
     fun removeCard(vararg cards: T){
         cards.forEach {
-            handList.remove(it)
+            cardList.remove(it)
         }
     }
 
+    fun removeCardWithPosition(index : Int) : T {
+        val card : T = cardList[index]
+        cardList.removeAt(index)
+        return card
+    }
+
     fun size(): Int {
-        return handList.size
+        return cardList.size
     }
 
     fun addCard(vararg cards: T) {
-        handList.addAll(cards.toList())
+        cardList.addAll(cards.toList())
     }
 
     fun addCard(hand: Hand<T>) {
-        handList.addAll(hand.handList)
+        cardList.addAll(hand.cardList)
     }
 
 }

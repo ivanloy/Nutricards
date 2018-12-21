@@ -44,7 +44,8 @@ public class Stequeue<T>{ //TODO Iterator, doc, refactor, invertir push/draw/enq
 
         if(size >= queue.length) resize(size * 2);
         shiftToRight();
-        queue[size++] = item;
+        queue[0] = item;
+        size++;
 
     }
 
@@ -63,7 +64,7 @@ public class Stequeue<T>{ //TODO Iterator, doc, refactor, invertir push/draw/enq
 
     public void shiftToLeft(){
 
-        for(int i = size - 1; i > 0; i++){
+        for(int i = 1; i < size; i++){
             queue[i-1] = queue[i];
         }
 
@@ -73,7 +74,7 @@ public class Stequeue<T>{ //TODO Iterator, doc, refactor, invertir push/draw/enq
 
     public void shiftToRight(){
 
-        for(int i = 0; i < size; i++){
+        for(int i = size - 1; i >= 0; i--){
             queue[i+1] = queue[i];
         }
 

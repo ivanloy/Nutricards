@@ -101,7 +101,7 @@ class FoodCardsDeck : Stequeue<FoodCard>() {
                         .quantity / 2
         )
 
-        shuffle();
+        shuffle()
     }
 
 }
