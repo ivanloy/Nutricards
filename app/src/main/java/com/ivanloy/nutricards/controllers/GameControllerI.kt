@@ -9,11 +9,12 @@ import com.ivanloy.nutricards.gameelements.FoodCard
 interface GameControllerI {
 
     fun nextPlayer()
-    fun drawCardToCurrentPlayerHand()
-    fun fillBoard()
+    fun drawCardToCurrentPlayerHand() : Boolean
+    fun fillBoard() : Boolean
+    fun getDeckSize() : Int
     fun drawCardFromBoardToCurrentPlayerHand(card : FoodCard)
+    fun drawCardFromBoardToCurrentPlayerHand(index : Int)
     fun getCurrentPlayerHand() : Hand<FoodCard>
     fun getBoardCard(index : Int) : FoodCard
-    fun drawCardFromBoardToCurrentPlayerHand(index : Int)
 
 }

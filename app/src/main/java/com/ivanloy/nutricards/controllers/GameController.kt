@@ -27,24 +27,38 @@ class GameController(val numPlayers: NumPlayers = NumPlayers.DEFAULT) : GameCont
     var currentPlayer : Int = 0
         private set
 
+    override fun getDeckSize(): Int {
+        return deck.size()
+    }
+
     override fun getBoardCard(index: Int) : FoodCard {
-        return board.peekCard(index)
+        return board.peekCardOrDefault(index, FoodCard())
     }
 
     override fun nextPlayer(){
         if(currentPlayer == numPlayers.nPlayers - 1) currentPlayer = 0 else currentPlayer++
     }
 
-    override fun drawCardToCurrentPlayerHand(){
-        hands[currentPlayer]
-                .addCard(deck.drawCard())
+    override fun drawCardToCurrentPlayerHand() : Boolean{
+        var ret = false
+        if(!deck.isEmpty) {
+            hands[currentPlayer]
+                    .addCard(deck.drawCard())
+            ret = true
+        }
+        return ret
     }
 
-    override fun fillBoard(){
-        board = Hand()
-        repeat(numPlayers.nPlayers){
-            board.addCard(deck.drawCard())
+    override fun fillBoard() : Boolean{
+        var ret = false
+        if(!deck.isEmpty) {
+            board = Hand()
+            repeat(numPlayers.nPlayers) {
+                if (!deck.isEmpty) board.addCard(deck.drawCard())
+            }
+            ret = true
         }
+        return ret
     }
 
     override fun getCurrentPlayerHand(): Hand<FoodCard> {
@@ -57,7 +71,7 @@ class GameController(val numPlayers: NumPlayers = NumPlayers.DEFAULT) : GameCont
     }
 
     override fun drawCardFromBoardToCurrentPlayerHand(index : Int){
-        val card : FoodCard = board.removeCardWithPosition(index)
+        val card : FoodCard = board.removeCardWithPositionAndReplacement(index, FoodCard())
         hands[currentPlayer].addCard(card)
     }
 

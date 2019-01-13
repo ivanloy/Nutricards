@@ -18,6 +18,8 @@ class MainActivity : AppCompatActivity() {
                         .get(GameViewModel::class.java)
             }
 
+    var deckSize : Int = 0;
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
@@ -26,20 +28,29 @@ class MainActivity : AppCompatActivity() {
 
         model.fillBoard()
         setCardViewTexts()
+        setCardsLeft()
         //TODO ESTO ES TO CUTRE WEY
 
-        tv_foodCardOption1Text.setOnClickListener{
+        cv_foodCardOption1.setOnClickListener{
             model.drawCardFromBoardToCurrentPlayerHand(0) //TODO Give the last card to other player, next player
             model.fillBoard()
             setCardViewTexts()
+            setCardsLeft()
         }
 
-        tv_foodCardOption2Text.setOnClickListener{
+        cv_foodCardOption2.setOnClickListener{
             model.drawCardFromBoardToCurrentPlayerHand(1)
             model.fillBoard()
             setCardViewTexts()
+            setCardsLeft()
         }
 
+    }
+
+    fun setCardsLeft(){
+        //TODO Live dataaaaa
+        deckSize = model.getDeckSize()
+        tv_cardsLeftInDeck.text = "$deckSize/44"
     }
 
     fun setCardViewTexts(){

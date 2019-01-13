@@ -19,6 +19,10 @@ class Hand<T>: Cloneable {
         return cardList[index]
     }
 
+    fun peekCardOrDefault(index : Int, default : T) : T{
+        return if(index < cardList.size) cardList[index] else default
+    }
+
     fun removeCard(vararg cards: T){
         cards.forEach {
             cardList.remove(it)
@@ -28,6 +32,12 @@ class Hand<T>: Cloneable {
     fun removeCardWithPosition(index : Int) : T {
         val card : T = cardList[index]
         cardList.removeAt(index)
+        return card
+    }
+
+    fun removeCardWithPositionAndReplacement(index : Int, replacement : T) : T {
+        val card : T = cardList[index]
+        cardList[index] = replacement
         return card
     }
 
