@@ -13,25 +13,6 @@ class GameViewModel : ViewModel(), GameControllerI{
 
     private var gameController : GameController
 
-    fun getCardImageResource(card: FoodCard) : Int{
-        return when(card.type){
-            FoodCardTypes.CEREAL -> R.drawable.cereal
-            FoodCardTypes.DAIRY -> R.drawable.dairy
-            FoodCardTypes.FISH -> R.drawable.fish
-            FoodCardTypes.FORK -> R.drawable.fork
-            FoodCardTypes.FRUIT -> R.drawable.fruit
-            FoodCardTypes.MEAT -> R.drawable.meat
-            FoodCardTypes.PASTA -> R.drawable.pasta
-            FoodCardTypes.SWEET -> R.drawable.sweet
-            FoodCardTypes.VEGETABLE -> R.drawable.vegetable
-            else -> R.drawable.sweet //TODO YUNOW
-        }
-    }
-
-    fun getCardImageResourceFromBoard(index : Int) : Int{
-        return getCardImageResource(getBoardCard(index)) //TODO Do in other index method
-    }
-
     init {
         gameController = GameController()
     }

@@ -26,22 +26,18 @@ class MainActivity : AppCompatActivity() {
 
         model.fillBoard()
         setCardViewTexts()
-        setCardViewImages()
-
         //TODO ESTO ES TO CUTRE WEY
 
         tv_foodCardOption1Text.setOnClickListener{
             model.drawCardFromBoardToCurrentPlayerHand(0) //TODO Give the last card to other player, next player
             model.fillBoard()
             setCardViewTexts()
-            setCardViewImages()
         }
 
         tv_foodCardOption2Text.setOnClickListener{
             model.drawCardFromBoardToCurrentPlayerHand(1)
             model.fillBoard()
             setCardViewTexts()
-            setCardViewImages()
         }
 
     }
@@ -60,18 +56,6 @@ class MainActivity : AppCompatActivity() {
 
     }
 
-    fun setCardViewImages(){ //TODO Images in another folder
 
-        img_foodCardOption1Image
-                .setImageResource(
-                        model.getCardImageResourceFromBoard(0)
-                )
-
-        img_foodCardOption2Image
-                .setImageResource(
-                        model.getCardImageResourceFromBoard(1)
-                )
-
-    }
 
 }
