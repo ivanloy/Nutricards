@@ -1,13 +1,9 @@
 package com.ivanloy.nutricards.viewmodels
 
-import androidx.lifecycle.LiveData
-import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
-import com.ivanloy.nutricards.R
 import com.ivanloy.nutricards.controllers.GameController
 import com.ivanloy.nutricards.controllers.GameControllerI
 import com.ivanloy.nutricards.ds.Hand
-import com.ivanloy.nutricards.gamedata.FoodCardTypes
 import com.ivanloy.nutricards.gamedata.NumPlayers
 import com.ivanloy.nutricards.gameelements.FoodCard
 
@@ -17,6 +13,10 @@ class GameViewModel : ViewModel(), GameControllerI{
 
     init {
         gameController = GameController()
+    }
+
+    fun getInitialDeckSize() : Int{
+        return gameController.initialDeckSize
     }
 
     fun buildGameController(numPlayers: NumPlayers = NumPlayers.DEFAULT) {
@@ -31,8 +31,12 @@ class GameViewModel : ViewModel(), GameControllerI{
         return gameController.board
     }
 
-    override fun getDeckSize(): Int {
-        return gameController.getDeckSize()
+    override fun calculateCurrentPlayerScore(): Int {
+        return gameController.calculateCurrentPlayerScore()
+    }
+
+    override fun getCurrentDeckSize(): Int {
+        return gameController.getCurrentDeckSize()
     }
 
     override fun getBoardCard(index: Int): FoodCard {

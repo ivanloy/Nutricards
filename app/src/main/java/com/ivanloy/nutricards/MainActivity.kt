@@ -2,10 +2,9 @@ package com.ivanloy.nutricards
 
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
-import androidx.cardview.widget.CardView
-import androidx.lifecycle.ViewModel
 import androidx.lifecycle.ViewModelProviders
 import com.ivanloy.nutricards.gamedata.NumPlayers
+import com.ivanloy.nutricards.util.TextUtil
 import com.ivanloy.nutricards.viewmodels.GameViewModel
 import kotlinx.android.synthetic.main.activity_main.*
 
@@ -29,6 +28,7 @@ class MainActivity : AppCompatActivity() {
         model.fillBoard()
         setCardViewTexts()
         setCardsLeft()
+        setPlayerScore()
         //TODO ESTO ES TO CUTRE WEY
 
         cv_foodCardOption1.setOnClickListener{
@@ -36,6 +36,7 @@ class MainActivity : AppCompatActivity() {
             model.fillBoard()
             setCardViewTexts()
             setCardsLeft()
+            setPlayerScore()
         }
 
         cv_foodCardOption2.setOnClickListener{
@@ -43,14 +44,23 @@ class MainActivity : AppCompatActivity() {
             model.fillBoard()
             setCardViewTexts()
             setCardsLeft()
+            setPlayerScore()
         }
 
     }
 
     fun setCardsLeft(){
         //TODO Live dataaaaa
-        deckSize = model.getDeckSize()
-        tv_cardsLeftInDeck.text = "$deckSize/44"
+        val currentDeckSize = model.getCurrentDeckSize()
+        val initialDeckSize = model.getInitialDeckSize()
+
+        tv_cardsLeftInDeck.text = TextUtil
+                .fromHtml("<big>$currentDeckSize</big>/<small>$initialDeckSize</small>");
+    }
+
+    fun setPlayerScore(){
+        tv_playerScore.text = model
+                .calculateCurrentPlayerScore().toString()
     }
 
     fun setCardViewTexts(){

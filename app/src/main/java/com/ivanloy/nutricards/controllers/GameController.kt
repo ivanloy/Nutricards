@@ -2,6 +2,7 @@ package com.ivanloy.nutricards.controllers
 
 import com.ivanloy.nutricards.ds.FoodCardsDeck
 import com.ivanloy.nutricards.ds.Hand
+import com.ivanloy.nutricards.gamedata.FoodCardTypes
 import com.ivanloy.nutricards.gamedata.NumPlayers
 import com.ivanloy.nutricards.gameelements.FoodCard
 
@@ -12,6 +13,7 @@ class GameController(val numPlayers: NumPlayers = NumPlayers.DEFAULT) : GameCont
     var deck : FoodCardsDeck
     var hands : MutableList< Hand< FoodCard >>
     var board : Hand< FoodCard >
+    var initialDeckSize : Int
 
     init {
 
@@ -22,12 +24,18 @@ class GameController(val numPlayers: NumPlayers = NumPlayers.DEFAULT) : GameCont
         buildDeck()
         buildHands()
 
+        initialDeckSize = deck.size()
+
     }
 
     var currentPlayer : Int = 0
         private set
 
-    override fun getDeckSize(): Int {
+    override fun calculateCurrentPlayerScore(): Int {
+        return PointsCalculator.calculateHandPoints(hands[currentPlayer])
+    }
+
+    override fun getCurrentDeckSize(): Int {
         return deck.size()
     }
 
@@ -51,13 +59,12 @@ class GameController(val numPlayers: NumPlayers = NumPlayers.DEFAULT) : GameCont
 
     override fun fillBoard() : Boolean{
         var ret = false
-        if(!deck.isEmpty) {
-            board = Hand()
-            repeat(numPlayers.nPlayers) {
-                if (!deck.isEmpty) board.addCard(deck.drawCard())
-            }
-            ret = true
+        board = Hand()
+        repeat(numPlayers.nPlayers) {
+            if (!deck.isEmpty) board.addCard(deck.drawCard())
+            else board.addCard(FoodCard(FoodCardTypes.BLANK))
         }
+        ret = true
         return ret
     }
 
@@ -71,12 +78,14 @@ class GameController(val numPlayers: NumPlayers = NumPlayers.DEFAULT) : GameCont
     }
 
     override fun drawCardFromBoardToCurrentPlayerHand(index : Int){
-        val card : FoodCard = board.removeCardWithPositionAndReplacement(index, FoodCard())
+        val card : FoodCard = board.removeCardWithPosition(index)
         hands[currentPlayer].addCard(card)
     }
 
-    fun buildDeck() : FoodCardsDeck =
-            deck.apply { buildInitialDeck(numPlayers)}
+    fun buildDeck() {
+        deck.buildInitialDeck(numPlayers)
+        initialDeckSize = deck.size()
+    }
 
 
     fun buildHands(){
