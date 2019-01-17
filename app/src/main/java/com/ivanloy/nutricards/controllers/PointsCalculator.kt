@@ -16,28 +16,55 @@ class PointsCalculator {
             var cardMap : HashMap<FoodCardTypes, Int> = getCardsMap(hand)
             var total : Int = 0
 
+
+            total += calculateSweetPoints(cardMap[FoodCardTypes.SWEET])
+            total += calculateDairyPoints(cardMap[FoodCardTypes.DAIRY])
+            total += calculateFruitPoints(cardMap[FoodCardTypes.FRUIT])
+            total += calculateMeatAndFishPoints(cardMap[FoodCardTypes.MEAT], cardMap[FoodCardTypes.FISH])
+
+
             return total
             //TODO Vegetable and cereal
         }
 
-        fun calculateDairyPoints(amount : Int){
-            return amount
+        fun calculateSweetPoints(amount : Int?) : Int {
+            val amountNotNull = amount ?: 0
+            var ret : Int = 0
+            if(amountNotNull == 1) ret = 10
+            else if(amountNotNull > 1) ret = -5 * amountNotNull
+            return ret
         }
 
-        fun calculateMeatAndFishPoints(meatAmount : Int, fishAmount : Int){
-            var ret : Int = 0;
-            if(meatAmount >= 3) ret -= 4
-            if(fishAmount >= 3) ret -= 4
-            if(meatAmount < 3 && fishAmount < 3){ //TODO exclusive, legibility
-                if(meatAmount == 2 && fishAmount == 2) ret += 12
+        fun calculateDairyPoints(amount : Int?) : Int{
+            val amountNotNull = amount ?: 0
+            var ret : Int = 0
+            if(amountNotNull == 3) ret = 8
+            else if(amountNotNull == 5) ret = -10
+            else if(amountNotNull == 6) ret = 20
+            return ret
+        }
+
+        fun calculateFruitPoints(amount : Int?) : Int{
+            return amount ?: 0
+        }
+
+        fun calculateMeatAndFishPoints(meatAmount : Int?, fishAmount : Int?) : Int{
+            val meatAmountNotNull = meatAmount ?: 0
+            val fishAmountNotNull = fishAmount ?: 0
+            var ret : Int = 0
+            if(meatAmountNotNull >= 3) ret -= 4
+            if(fishAmountNotNull >= 3) ret -= 4
+            else if(meatAmountNotNull < 3 && fishAmountNotNull < 3 && meatAmountNotNull > 0 && fishAmountNotNull > 0){ //TODO exclusive, legibility
+                if(meatAmountNotNull == 2 && fishAmountNotNull == 2) ret += 12
                 else ret += 6
             }
+            return ret
         }
 
         fun getCardsMap(hand : Hand<FoodCard>) : HashMap<FoodCardTypes, Int>{
 
             var cardMap : HashMap<FoodCardTypes, Int> = HashMap()
-            for(card in hand){
+            for(card in hand.cardList){
                 var cardTypeAmount : Int? = cardMap[card.type]
                 if(cardTypeAmount == null) cardMap.put(card.type, 1)
                 else cardMap.put(card.type, cardTypeAmount + 1)

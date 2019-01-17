@@ -2,7 +2,7 @@ package com.ivanloy.nutricards.ds
 
 import com.ivanloy.nutricards.gameelements.FoodCard
 
-class Hand<T>: Cloneable, Iterator<T> {
+class Hand<T>: Cloneable{
 
     var cardList: MutableList<T> = ArrayList()
         private set
@@ -51,18 +51,6 @@ class Hand<T>: Cloneable, Iterator<T> {
 
     fun addCard(hand: Hand<T>) {
         cardList.addAll(hand.cardList)
-    }
-
-
-    private var i : Int = 0; //TODO HMMMMM, noooope, encapsular
-    override fun next(): T {
-        return cardList[i++]
-    }
-
-    override fun hasNext(): Boolean {
-        var ret = false
-        if(i + 1 < cardList.size) ret = true
-        return ret
     }
 
 }
