@@ -16,10 +16,10 @@
         android:layout_marginTop="8dp"
         android:layout_marginEnd="16dp"
         android:layout_marginBottom="8dp"
+        android:backgroundTint="#fff"
         android:clickable="true"
         android:focusable="true"
         app:cardCornerRadius="10dp"
-        android:backgroundTint="#fff"
         app:layout_constraintBottom_toTopOf="@+id/view2"
         app:layout_constraintEnd_toStartOf="@+id/cv_foodCardOption2"
         app:layout_constraintHorizontal_bias="0.5"
@@ -46,10 +46,10 @@
         android:layout_marginTop="8dp"
         android:layout_marginEnd="32dp"
         android:layout_marginBottom="8dp"
+        android:backgroundTint="#fff"
         android:clickable="true"
         android:focusable="true"
         app:cardCornerRadius="10dp"
-        android:backgroundTint="#fff"
         app:layout_constraintBottom_toTopOf="@+id/view2"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.5"
@@ -61,8 +61,8 @@
             android:id="@+id/tv_foodCardOption2Text"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
-            android:gravity="center"
             android:layout_gravity="bottom|center_horizontal"
+            android:gravity="center"
             android:padding="4dp"
             android:textAllCaps="true" />
 
@@ -74,8 +74,8 @@
         android:layout_height="50dp"
         android:background="@color/colorPrimary"
         android:gravity="center"
-        android:text="Holmes"
         android:paddingLeft="20dp"
+        android:text="Holmes"
         android:textColor="#fff"
         android:textSize="20sp"
         android:textStyle="italic"
@@ -102,7 +102,7 @@
 
     <View
         android:id="@+id/view2"
-        android:layout_width="wrap_content"
+        android:layout_width="414dp"
         android:layout_height="183dp"
         android:background="@color/colorPrimary"
         app:layout_constraintBottom_toBottomOf="parent"
@@ -114,15 +114,15 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:background="@drawable/cards_left_rectangle"
-        android:text="21/40"
         android:gravity="center"
-        android:textStyle="bold"
+        android:paddingLeft="16dp"
+        android:paddingTop="4dp"
+        android:paddingRight="16dp"
+        android:paddingBottom="4dp"
+        android:text="21/40"
         android:textColor="@color/colorPrimary"
         android:textSize="18sp"
-        android:paddingTop="4dp"
-        android:paddingBottom="4dp"
-        android:paddingRight="16dp"
-        android:paddingLeft="16dp"
+        android:textStyle="bold"
         app:layout_constraintBottom_toTopOf="@+id/view2"
         app:layout_constraintEnd_toEndOf="parent" />
 
@@ -138,5 +138,159 @@
         android:textStyle="bold"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
+
+    <TextView
+        android:id="@+id/FFISH"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="8dp"
+        android:layout_marginEnd="32dp"
+        android:text="FISH"
+        android:textColor="#fff"
+        android:textSize="20sp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toTopOf="@+id/view2" />
+
+    <TextView
+        android:id="@+id/FFISH2"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="8dp"
+        android:layout_marginTop="8dp"
+        android:layout_marginEnd="8dp"
+        android:text="PASTA"
+        android:textColor="#fff"
+        android:textSize="20sp"
+        app:layout_constraintEnd_toStartOf="@+id/FFISH"
+        app:layout_constraintStart_toEndOf="@+id/FFISH5"
+        app:layout_constraintTop_toTopOf="@+id/view2" />
+
+    <TextView
+        android:id="@+id/FFISH3"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginEnd="32dp"
+        android:layout_marginBottom="8dp"
+        android:text="MEAT"
+        android:textColor="#fff"
+        android:textSize="20sp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent" />
+
+    <TextView
+        android:id="@+id/FFISH4"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="8dp"
+        android:layout_marginEnd="8dp"
+        android:layout_marginBottom="8dp"
+        android:text="FRUIT"
+        android:textColor="#fff"
+        android:textSize="20sp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toStartOf="@+id/FFISH3"
+        app:layout_constraintStart_toEndOf="@+id/FFISH6" />
+
+    <TextView
+        android:id="@+id/FFISH5"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="32dp"
+        android:layout_marginTop="8dp"
+        android:text="SWEET"
+        android:textColor="#fff"
+        android:textSize="20sp"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="@+id/view2" />
+
+    <TextView
+        android:id="@+id/tv_sweetAmount"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="8dp"
+        android:text="0"
+        android:textColor="#fff"
+        android:textSize="30sp"
+        android:textStyle="bold"
+        app:layout_constraintEnd_toEndOf="@+id/FFISH5"
+        app:layout_constraintStart_toStartOf="@+id/FFISH5"
+        app:layout_constraintTop_toBottomOf="@+id/FFISH5" />
+
+    <TextView
+        android:id="@+id/tv_pastaAmount"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="8dp"
+        android:text="0"
+        android:textColor="#fff"
+        android:textSize="30sp"
+        android:textStyle="bold"
+        app:layout_constraintEnd_toEndOf="@+id/FFISH2"
+        app:layout_constraintStart_toStartOf="@+id/FFISH2"
+        app:layout_constraintTop_toBottomOf="@+id/FFISH2" />
+
+    <TextView
+        android:id="@+id/tv_fruitAmount"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginBottom="8dp"
+        android:text="0"
+        android:textColor="#fff"
+        android:textSize="30sp"
+        android:textStyle="bold"
+        app:layout_constraintBottom_toTopOf="@+id/FFISH4"
+        app:layout_constraintEnd_toEndOf="@+id/FFISH4"
+        app:layout_constraintStart_toStartOf="@+id/FFISH4" />
+
+    <TextView
+        android:id="@+id/tv_meatAmount"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginBottom="8dp"
+        android:text="0"
+        android:textColor="#fff"
+        android:textSize="30sp"
+        android:textStyle="bold"
+        app:layout_constraintBottom_toTopOf="@+id/FFISH3"
+        app:layout_constraintEnd_toEndOf="@+id/FFISH3"
+        app:layout_constraintStart_toStartOf="@+id/FFISH3" />
+
+    <TextView
+        android:id="@+id/tv_fishAmount"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="8dp"
+        android:text="0"
+        android:textColor="#fff"
+        android:textSize="30sp"
+        android:textStyle="bold"
+        app:layout_constraintEnd_toEndOf="@+id/FFISH"
+        app:layout_constraintStart_toStartOf="@+id/FFISH"
+        app:layout_constraintTop_toBottomOf="@+id/FFISH" />
+
+    <TextView
+        android:id="@+id/tv_dairyAmount"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginBottom="8dp"
+        android:text="0"
+        android:textColor="#fff"
+        android:textSize="30sp"
+        android:textStyle="bold"
+        app:layout_constraintBottom_toTopOf="@+id/FFISH6"
+        app:layout_constraintEnd_toEndOf="@+id/FFISH6"
+        app:layout_constraintStart_toStartOf="@+id/FFISH6" />
+
+    <TextView
+        android:id="@+id/FFISH6"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="32dp"
+        android:layout_marginBottom="8dp"
+        android:text="DAIRY"
+        android:textColor="#fff"
+        android:textSize="20sp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintStart_toStartOf="parent" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>

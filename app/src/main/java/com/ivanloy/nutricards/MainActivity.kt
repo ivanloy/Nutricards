@@ -3,6 +3,7 @@ package com.ivanloy.nutricards
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import androidx.lifecycle.ViewModelProviders
+import com.ivanloy.nutricards.gamedata.FoodCardTypes
 import com.ivanloy.nutricards.gamedata.NumPlayers
 import com.ivanloy.nutricards.util.TextUtil
 import com.ivanloy.nutricards.viewmodels.GameViewModel
@@ -29,6 +30,7 @@ class MainActivity : AppCompatActivity() {
         setCardViewTexts()
         setCardsLeft()
         setPlayerScore()
+        setPlayerCardAmounts() //TODO Todos estos metodos en uno
         //TODO ESTO ES TO CUTRE WEY
 
         cv_foodCardOption1.setOnClickListener{
@@ -37,6 +39,7 @@ class MainActivity : AppCompatActivity() {
             setCardViewTexts()
             setCardsLeft()
             setPlayerScore()
+            setPlayerCardAmounts()
         }
 
         cv_foodCardOption2.setOnClickListener{
@@ -45,6 +48,7 @@ class MainActivity : AppCompatActivity() {
             setCardViewTexts()
             setCardsLeft()
             setPlayerScore()
+            setPlayerCardAmounts()
         }
 
     }
@@ -61,6 +65,29 @@ class MainActivity : AppCompatActivity() {
     fun setPlayerScore(){
         tv_playerScore.text = model
                 .calculateCurrentPlayerScore().toString()
+    }
+
+    fun setPlayerCardAmounts(){
+        tv_dairyAmount.text = model
+                .getCardAmountOfType(FoodCardTypes.DAIRY)
+                .toString()
+        tv_fishAmount.text = model
+                .getCardAmountOfType(FoodCardTypes.FISH)
+                .toString()
+        tv_fruitAmount.text = model
+                .getCardAmountOfType(FoodCardTypes.FRUIT)
+                .toString()
+        tv_meatAmount.text = model
+                .getCardAmountOfType(FoodCardTypes.MEAT)
+                .toString()
+        tv_sweetAmount.text = model
+                .getCardAmountOfType(FoodCardTypes.SWEET)
+                .toString()
+        tv_pastaAmount.text = (
+                    model.getCardAmountOfType(FoodCardTypes.PASTA) +
+                    model.getCardAmountOfType(FoodCardTypes.CEREAL)
+                ).toString()
+
     }
 
     fun setCardViewTexts(){

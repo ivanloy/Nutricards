@@ -4,6 +4,7 @@ import androidx.lifecycle.ViewModel
 import com.ivanloy.nutricards.controllers.GameController
 import com.ivanloy.nutricards.controllers.GameControllerI
 import com.ivanloy.nutricards.ds.Hand
+import com.ivanloy.nutricards.gamedata.FoodCardTypes
 import com.ivanloy.nutricards.gamedata.NumPlayers
 import com.ivanloy.nutricards.gameelements.FoodCard
 
@@ -29,6 +30,10 @@ class GameViewModel : ViewModel(), GameControllerI{
 
     fun getBoard() : Hand<FoodCard>{
         return gameController.board
+    }
+
+    override fun getCardAmountOfType(type: FoodCardTypes): Int {
+        return gameController.getCardAmountOfType(type)
     }
 
     override fun calculateCurrentPlayerScore(): Int {

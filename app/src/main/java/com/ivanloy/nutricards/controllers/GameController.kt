@@ -1,5 +1,6 @@
 package com.ivanloy.nutricards.controllers
 
+import android.graphics.Point
 import com.ivanloy.nutricards.ds.FoodCardsDeck
 import com.ivanloy.nutricards.ds.Hand
 import com.ivanloy.nutricards.gamedata.FoodCardTypes
@@ -30,6 +31,10 @@ class GameController(val numPlayers: NumPlayers = NumPlayers.DEFAULT) : GameCont
 
     var currentPlayer : Int = 0
         private set
+
+    override fun getCardAmountOfType(type: FoodCardTypes): Int {
+        return(PointsCalculator.getCardsMap(hands[currentPlayer])[type] ?: 0) //TODO Get map to another class
+    }
 
     override fun calculateCurrentPlayerScore(): Int {
         return PointsCalculator.calculateHandPoints(hands[currentPlayer])
