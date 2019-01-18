@@ -29,9 +29,11 @@ dependencies {
     androidTestImplementation 'androidx.test:runner:1.1.1'
     androidTestImplementation 'androidx.test.espresso:espresso-core:3.1.1'
     annotationProcessor 'androidx.lifecycle:lifecycle-compiler:2.1.0-alpha01'
+    implementation 'androidx.recyclerview:recyclerview:1.0.0'
+    implementation 'com.google.android.material:material:1.0.0-rc01'
     implementation "org.jetbrains.kotlin:kotlin-stdlib-jdk7:$kotlin_version"
     implementation 'androidx.cardview:cardview:1.0.0'
-    implementation 'com.lorentzos.swipecards:library:1.0.8@aar'
+    implementation "com.yuyakaido.android:card-stack-view:2.2.2"
     apply plugin: 'kotlin-android-extensions'
 }
 repositories {

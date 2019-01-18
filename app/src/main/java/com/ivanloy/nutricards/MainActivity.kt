@@ -2,14 +2,22 @@ package com.ivanloy.nutricards
 
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
+import android.util.Log
+import android.view.View
+import android.widget.TextView
+import androidx.drawerlayout.widget.DrawerLayout
 import androidx.lifecycle.ViewModelProviders
+import androidx.recyclerview.widget.DefaultItemAnimator
+import com.ivanloy.nutricards.adapters.CardStackAdapter
 import com.ivanloy.nutricards.gamedata.FoodCardTypes
 import com.ivanloy.nutricards.gamedata.NumPlayers
 import com.ivanloy.nutricards.util.TextUtil
 import com.ivanloy.nutricards.viewmodels.GameViewModel
+import com.yuyakaido.android.cardstackview.*
 import kotlinx.android.synthetic.main.activity_main.*
+import java.util.ArrayList
 
-class MainActivity : AppCompatActivity() {
+class MainActivity : AppCompatActivity(), CardStackListener {
 
     private val model //TODO Outside?
             by lazy {
@@ -18,11 +26,17 @@ class MainActivity : AppCompatActivity() {
                         .get(GameViewModel::class.java)
             }
 
-    var deckSize : Int = 0;
+    private val cardStackView by lazy { findViewById<CardStackView>(R.id.cv_foodCardOption1) }
+    private val manager by lazy { CardStackLayoutManager(this, this) }
+    private val adapter by lazy { CardStackAdapter(createList()) }
+
+    var deckSize : Int = 0
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
+
+        setupCardStackView()
 
         model.buildGameController(NumPlayers.TWO_PLAYERS) //TODO Reinicia al girar y recrear la activity
 
@@ -33,14 +47,6 @@ class MainActivity : AppCompatActivity() {
         setPlayerCardAmounts() //TODO Todos estos metodos en uno
         //TODO ESTO ES TO CUTRE WEY
 
-        cv_foodCardOption1.setOnClickListener{
-            model.drawCardFromBoardToCurrentPlayerHand(0) //TODO Give the last card to other player, next player
-            model.fillBoard()
-            setCardViewTexts()
-            setCardsLeft()
-            setPlayerScore()
-            setPlayerCardAmounts()
-        }
 
         cv_foodCardOption2.setOnClickListener{
             model.drawCardFromBoardToCurrentPlayerHand(1)
@@ -51,6 +57,58 @@ class MainActivity : AppCompatActivity() {
             setPlayerCardAmounts()
         }
 
+    }
+
+    override fun onCardDragging(direction: Direction, ratio: Float) {
+        Log.d("CardStackView", "onCardDragging: d = ${direction.name}, r = $ratio")
+    }
+
+    override fun onCardSwiped(direction: Direction) {
+        Log.d("CardStackView", "onCardSwiped: p = ${manager.topPosition}, d = $direction")
+        if (manager.topPosition == adapter.itemCount - 5) {
+       // //    paginate()
+        }
+    }
+
+    override fun onCardRewound() {
+        Log.d("CardStackView", "onCardRewound: ${manager.topPosition}")
+    }
+
+    override fun onCardCanceled() {
+        Log.d("CardStackView", "onCardCanceled: ${manager.topPosition}")
+    }
+
+    override fun onCardAppeared(view: View, position: Int) {
+        val textView = view.findViewById<TextView>(R.id.card_type)
+        Log.d("CardStackView", "onCardAppeared: ($position) ${textView.text}")
+    }
+
+    override fun onCardDisappeared(view: View, position: Int) {
+        val textView = view.findViewById<TextView>(R.id.card_type)
+        Log.d("CardStackView", "onCardDisappeared: ($position) ${textView.text}")
+    }
+
+    private fun setupCardStackView() {
+        initialize()
+    }
+
+    private fun initialize() {
+        manager.setStackFrom(StackFrom.None)
+        manager.setVisibleCount(3)
+        manager.setTranslationInterval(8.0f)
+        manager.setScaleInterval(0.95f)
+        manager.setSwipeThreshold(0.3f)
+        manager.setMaxDegree(20.0f)
+        manager.setDirections(Direction.HORIZONTAL)
+        manager.setCanScrollHorizontal(true)
+        manager.setCanScrollVertical(true)
+        cardStackView.layoutManager = manager
+        cardStackView.adapter = adapter
+        cardStackView.itemAnimator.apply {
+            if (this is DefaultItemAnimator) {
+                supportsChangeAnimations = false
+            }
+        }
     }
 
     fun setCardsLeft(){
@@ -92,10 +150,6 @@ class MainActivity : AppCompatActivity() {
 
     fun setCardViewTexts(){
 
-        tv_foodCardOption1Text.text = model //TODO Live data?
-                .getBoardCard(0)
-                .type
-                .toString()
 
         tv_foodCardOption2Text.text = model
                 .getBoardCard(1)
@@ -104,6 +158,15 @@ class MainActivity : AppCompatActivity() {
 
     }
 
-
+    private fun createList(): List<String> {
+        val spots = ArrayList<String>()
+        spots.add("Choripan")
+        spots.add("Salchipapa")
+        spots.add("Galletanutella")
+        spots.add("Comida no sana")
+        spots.add("La cebolla me pone cachondo")
+        spots.add("Miau?")
+        return spots
+    }
 
 }

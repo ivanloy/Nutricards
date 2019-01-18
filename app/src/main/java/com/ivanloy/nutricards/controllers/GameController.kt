@@ -63,14 +63,12 @@ class GameController(val numPlayers: NumPlayers = NumPlayers.DEFAULT) : GameCont
     }
 
     override fun fillBoard() : Boolean{
-        var ret = false
         board = Hand()
         repeat(numPlayers.nPlayers) {
             if (!deck.isEmpty) board.addCard(deck.drawCard())
             else board.addCard(FoodCard(FoodCardTypes.BLANK))
         }
-        ret = true
-        return ret
+        return true
     }
 
     override fun getCurrentPlayerHand(): Hand<FoodCard> {

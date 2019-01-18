@@ -8,35 +8,14 @@
     tools:layout_editor_absoluteY="81dp">
 
 
-    <androidx.cardview.widget.CardView
+    <com.yuyakaido.android.cardstackview.CardStackView
         android:id="@+id/cv_foodCardOption1"
-        android:layout_width="0dp"
+        android:layout_width="100dp"
         android:layout_height="200dp"
-        android:layout_marginStart="32dp"
-        android:layout_marginTop="8dp"
-        android:layout_marginEnd="16dp"
+        android:layout_marginEnd="60dp"
         android:layout_marginBottom="8dp"
-        android:backgroundTint="#fff"
-        android:clickable="true"
-        android:focusable="true"
-        app:cardCornerRadius="10dp"
-        app:layout_constraintBottom_toTopOf="@+id/view2"
-        app:layout_constraintEnd_toStartOf="@+id/cv_foodCardOption2"
-        app:layout_constraintHorizontal_bias="0.5"
-        app:layout_constraintHorizontal_chainStyle="spread"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/tv_gameActionBar">
-
-        <TextView
-            android:id="@+id/tv_foodCardOption1Text"
-            android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:layout_gravity="bottom|center_horizontal"
-            android:gravity="center"
-            android:padding="4dp"
-            android:textAllCaps="true" />
-
-    </androidx.cardview.widget.CardView>
+        app:layout_constraintBottom_toBottomOf="@+id/cv_foodCardOption2"
+        app:layout_constraintEnd_toStartOf="@+id/cv_foodCardOption2"></com.yuyakaido.android.cardstackview.CardStackView>
 
     <androidx.cardview.widget.CardView
         android:id="@+id/cv_foodCardOption2"
@@ -59,7 +38,7 @@
 
         <TextView
             android:id="@+id/tv_foodCardOption2Text"
-            android:layout_width="match_parent"
+            android:layout_width="200dp"
             android:layout_height="match_parent"
             android:layout_gravity="bottom|center_horizontal"
             android:gravity="center"
