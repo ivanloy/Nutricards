@@ -7,33 +7,33 @@
     tools:context=".MainActivity"
     tools:layout_editor_absoluteY="81dp">
 
+    <RelativeLayout
+        android:layout_width="200dp"
+        android:layout_height="300dp"
+        android:clipChildren="false"
+        android:clipToPadding="false"
+        android:padding="50dp">
 
-    <com.yuyakaido.android.cardstackview.CardStackView
-        android:id="@+id/cv_foodCardOption1"
-        android:layout_width="100dp"
-        android:layout_height="200dp"
-        android:layout_marginEnd="60dp"
-        android:layout_marginBottom="8dp"
-        app:layout_constraintBottom_toBottomOf="@+id/cv_foodCardOption2"
-        app:layout_constraintEnd_toStartOf="@+id/cv_foodCardOption2"></com.yuyakaido.android.cardstackview.CardStackView>
+        <com.yuyakaido.android.cardstackview.CardStackView
+            android:id="@+id/cv_foodCardOption1"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"></com.yuyakaido.android.cardstackview.CardStackView>
+
+    </RelativeLayout>
+
 
     <androidx.cardview.widget.CardView
         android:id="@+id/cv_foodCardOption2"
-        android:layout_width="0dp"
+        android:layout_width="163dp"
         android:layout_height="200dp"
-        android:layout_marginStart="16dp"
-        android:layout_marginTop="8dp"
-        android:layout_marginEnd="32dp"
+        android:layout_marginEnd="8dp"
         android:layout_marginBottom="8dp"
         android:backgroundTint="#fff"
         android:clickable="true"
         android:focusable="true"
         app:cardCornerRadius="10dp"
-        app:layout_constraintBottom_toTopOf="@+id/view2"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.5"
-        app:layout_constraintStart_toEndOf="@+id/cv_foodCardOption1"
-        app:layout_constraintTop_toBottomOf="@+id/tv_gameActionBar">
+        app:layout_constraintBottom_toTopOf="@+id/tv_cardsLeftInDeck"
+        app:layout_constraintEnd_toEndOf="parent">
 
 
         <TextView

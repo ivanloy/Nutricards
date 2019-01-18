@@ -99,7 +99,7 @@ class MainActivity : AppCompatActivity(), CardStackListener {
         manager.setScaleInterval(0.95f)
         manager.setSwipeThreshold(0.3f)
         manager.setMaxDegree(20.0f)
-        manager.setDirections(Direction.HORIZONTAL)
+        manager.setDirections(Direction.VERTICAL)
         manager.setCanScrollHorizontal(true)
         manager.setCanScrollVertical(true)
         cardStackView.layoutManager = manager
