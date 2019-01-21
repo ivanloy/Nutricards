@@ -29,6 +29,9 @@ class MainActivity : AppCompatActivity(), CardStackListener {
     private val cardStackView by lazy { findViewById<CardStackView>(R.id.cv_foodCardOption1) }
     private val manager by lazy { CardStackLayoutManager(this, this) }
     private val adapter by lazy { CardStackAdapter(createList()) }
+    private val cardStackView2 by lazy { findViewById<CardStackView>(R.id.cv_foodCardOption2) }
+    private val manager2 by lazy { CardStackLayoutManager(this, this) }
+    private val adapter2 by lazy { CardStackAdapter(createList()) }
 
     var deckSize : Int = 0
 
@@ -46,16 +49,6 @@ class MainActivity : AppCompatActivity(), CardStackListener {
         setPlayerScore()
         setPlayerCardAmounts() //TODO Todos estos metodos en uno
         //TODO ESTO ES TO CUTRE WEY
-
-
-        cv_foodCardOption2.setOnClickListener{
-            model.drawCardFromBoardToCurrentPlayerHand(1)
-            model.fillBoard()
-            setCardViewTexts()
-            setCardsLeft()
-            setPlayerScore()
-            setPlayerCardAmounts()
-        }
 
     }
 
@@ -102,9 +95,28 @@ class MainActivity : AppCompatActivity(), CardStackListener {
         manager.setDirections(Direction.VERTICAL)
         manager.setCanScrollHorizontal(true)
         manager.setCanScrollVertical(true)
+
+        manager2.setStackFrom(StackFrom.None)
+        manager2.setVisibleCount(3)
+        manager2.setTranslationInterval(8.0f)
+        manager2.setScaleInterval(0.95f)
+        manager2.setSwipeThreshold(0.3f)
+        manager2.setMaxDegree(20.0f)
+        manager2.setDirections(Direction.VERTICAL)
+        manager2.setCanScrollHorizontal(true)
+        manager2.setCanScrollVertical(true)
+
         cardStackView.layoutManager = manager
         cardStackView.adapter = adapter
         cardStackView.itemAnimator.apply {
+            if (this is DefaultItemAnimator) {
+                supportsChangeAnimations = false
+            }
+        }
+
+        cardStackView2.layoutManager = manager2
+        cardStackView2.adapter = adapter2
+        cardStackView2.itemAnimator.apply {
             if (this is DefaultItemAnimator) {
                 supportsChangeAnimations = false
             }
@@ -150,11 +162,6 @@ class MainActivity : AppCompatActivity(), CardStackListener {
 
     fun setCardViewTexts(){
 
-
-        tv_foodCardOption2Text.text = model
-                .getBoardCard(1)
-                .type
-                .toString()
 
     }
 
