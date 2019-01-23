@@ -11,6 +11,7 @@ import androidx.recyclerview.widget.DefaultItemAnimator
 import com.ivanloy.nutricards.adapters.CardStackAdapter
 import com.ivanloy.nutricards.gamedata.FoodCardTypes
 import com.ivanloy.nutricards.gamedata.NumPlayers
+import com.ivanloy.nutricards.gameelements.FoodCard
 import com.ivanloy.nutricards.util.TextUtil
 import com.ivanloy.nutricards.viewmodels.GameViewModel
 import com.yuyakaido.android.cardstackview.*
@@ -53,13 +54,18 @@ class MainActivity : AppCompatActivity(), CardStackListener {
     }
 
     override fun onCardDragging(direction: Direction, ratio: Float) {
-        Log.d("CardStackView", "onCardDragging: d = ${direction.name}, r = $ratio")
+        //Log.d("CardStackView", "onCardDragging: d = ${direction.name}, r = $ratio")
     }
 
     override fun onCardSwiped(direction: Direction) {
         Log.d("CardStackView", "onCardSwiped: p = ${manager.topPosition}, d = $direction")
-        if (manager.topPosition == adapter.itemCount - 5) {
-       // //    paginate()
+        if (manager.topPosition == adapter.itemCount - 1) { //TODO Both cards
+            manager.setCanScrollHorizontal(false) //TODO Block
+            manager.setCanScrollVertical(false)
+        }
+        if (manager2.topPosition == adapter2.itemCount - 1) { //TODO Both cards
+            manager2.setCanScrollHorizontal(false) //TODO Block
+            manager2.setCanScrollVertical(false)
         }
     }
 
@@ -165,15 +171,15 @@ class MainActivity : AppCompatActivity(), CardStackListener {
 
     }
 
-    private fun createList(): List<String> {
-        val spots = ArrayList<String>()
-        spots.add("Choripan")
-        spots.add("Salchipapa")
+    private fun createList(): List<FoodCard> {
+        val deck = ArrayList<FoodCard>()
+        deck.add("Choripan")
+        deck.add("Salchipapa")
         spots.add("Galletanutella")
         spots.add("Comida no sana")
         spots.add("La cebolla me pone cachondo")
         spots.add("Miau?")
-        return spots
+        return deck
     }
 
 }
