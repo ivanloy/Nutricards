@@ -10,7 +10,6 @@ import com.ivanloy.nutricards.gameelements.FoodCard
 class GameController(val numPlayers: NumPlayers = NumPlayers.DEFAULT) : GameControllerI
 {
 
-
     var deck : FoodCardsDeck
     var hands : MutableList< Hand< FoodCard >>
     var board : Hand< FoodCard >
@@ -49,6 +48,10 @@ class GameController(val numPlayers: NumPlayers = NumPlayers.DEFAULT) : GameCont
         for(d in ret) d.putCardOnBottom(FoodCardTypes.BLANK)
 
         return ret
+    }
+
+    override fun addCardToCurrentPlayerHand(card: FoodCard) {
+        hands[currentPlayer].addCard(card)
     }
 
     override fun getCardAmountOfType(type: FoodCardTypes): Int {

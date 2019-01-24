@@ -62,6 +62,14 @@ class MainActivity : AppCompatActivity(), CardStackListener {
     override fun onCardSwiped(direction: Direction) {
         Log.d("CardStackView", "onCardSwiped: p = ${manager.topPosition}, d = $direction")
 
+        if(direction == Direction.Bottom){
+            model.addCardToCurrentPlayerHand(adapter.getData()[manager.topPosition])
+            setPlayerScore()
+            setPlayerCardAmounts()
+        }else{
+
+        }
+
         if (manager.topPosition == adapter.itemCount - 1) { //TODO Both cards
             manager.setCanScrollHorizontal(false) //TODO Block
             manager.setCanScrollVertical(false)

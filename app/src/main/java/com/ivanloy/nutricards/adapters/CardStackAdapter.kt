@@ -54,6 +54,10 @@ class CardStackAdapter(
         notifyDataSetChanged()
     }
 
+    fun getData() : List<FoodCard> { //TODO swipeListerer I guess
+        return this.cards
+    }
+
     fun getCardImage(type : FoodCardTypes) : Int{
         var ret : Int
 
