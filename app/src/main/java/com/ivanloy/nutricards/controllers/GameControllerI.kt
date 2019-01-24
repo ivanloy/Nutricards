@@ -1,7 +1,9 @@
 package com.ivanloy.nutricards.controllers
 
+import com.ivanloy.nutricards.ds.FoodCardsDeck
 import com.ivanloy.nutricards.ds.Hand
 import com.ivanloy.nutricards.gamedata.FoodCardTypes
+import com.ivanloy.nutricards.gamedata.NumPlayers
 import com.ivanloy.nutricards.gameelements.FoodCard
 
 /**
@@ -19,5 +21,6 @@ interface GameControllerI {
     fun getBoardCard(index : Int) : FoodCard
     fun calculateCurrentPlayerScore() : Int
     fun getCardAmountOfType(type : FoodCardTypes) : Int
+    fun getBoardDecks() : MutableList<FoodCardsDeck>
 
 }

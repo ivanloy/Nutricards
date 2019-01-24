@@ -3,21 +3,31 @@
 <androidx.cardview.widget.CardView
     xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
-    android:layout_width="80dp"
-    android:layout_height="80dp"
-    android:backgroundTint="#325215"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
     app:cardUseCompatPadding="true"
     app:cardPreventCornerOverlap="false"
-    app:cardCornerRadius="8dp"
+    app:cardCornerRadius="12dp"
     app:cardBackgroundColor="@android:color/white">
+
+
+        <com.makeramen.roundedimageview.RoundedImageView
+            android:id="@+id/card_image"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            app:riv_corner_radius="12dp"
+            android:scaleType="centerCrop"
+            android:layout_margin="0dp"/>
+
         <TextView
             android:id="@+id/card_type"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:textStyle="bold"
-            android:layout_gravity="center"
+            android:layout_gravity="bottom|center_horizontal"
+            android:layout_marginBottom="12dp"
             android:text="Papapapa"
             android:textColor="#000"
-            android:textSize="26sp"/>
+            android:textSize="18sp"/>
 
 </androidx.cardview.widget.CardView>

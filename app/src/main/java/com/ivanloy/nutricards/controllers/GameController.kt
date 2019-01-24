@@ -32,6 +32,25 @@ class GameController(val numPlayers: NumPlayers = NumPlayers.DEFAULT) : GameCont
     var currentPlayer : Int = 0
         private set
 
+    override fun getBoardDecks(): MutableList<FoodCardsDeck> {
+        var ret : MutableList<FoodCardsDeck> = ArrayList()
+        var player : Int = 0;
+
+        for(i in 0..numPlayers.nPlayers) ret.add(FoodCardsDeck())
+
+        deck.shuffle()
+
+        while(!deck.isEmpty){
+            ret[player].push(deck.drawCard())
+            player++
+            if(player >= numPlayers.nPlayers) player = 0
+        }
+
+        for(d in ret) d.putCardOnBottom(FoodCardTypes.BLANK)
+
+        return ret
+    }
+
     override fun getCardAmountOfType(type: FoodCardTypes): Int {
         return(PointsCalculator.getCardsMap(hands[currentPlayer])[type] ?: 0) //TODO Get map to another class
     }

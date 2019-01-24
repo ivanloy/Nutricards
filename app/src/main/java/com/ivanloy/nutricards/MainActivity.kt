@@ -9,6 +9,7 @@ import androidx.drawerlayout.widget.DrawerLayout
 import androidx.lifecycle.ViewModelProviders
 import androidx.recyclerview.widget.DefaultItemAnimator
 import com.ivanloy.nutricards.adapters.CardStackAdapter
+import com.ivanloy.nutricards.ds.FoodCardsDeck
 import com.ivanloy.nutricards.gamedata.FoodCardTypes
 import com.ivanloy.nutricards.gamedata.NumPlayers
 import com.ivanloy.nutricards.gameelements.FoodCard
@@ -29,10 +30,10 @@ class MainActivity : AppCompatActivity(), CardStackListener {
 
     private val cardStackView by lazy { findViewById<CardStackView>(R.id.cv_foodCardOption1) }
     private val manager by lazy { CardStackLayoutManager(this, this) }
-    private val adapter by lazy { CardStackAdapter(createList()) }
+    private val adapter by lazy { CardStackAdapter(this) }
     private val cardStackView2 by lazy { findViewById<CardStackView>(R.id.cv_foodCardOption2) }
     private val manager2 by lazy { CardStackLayoutManager(this, this) }
-    private val adapter2 by lazy { CardStackAdapter(createList()) }
+    private val adapter2 by lazy { CardStackAdapter(this) }
 
     var deckSize : Int = 0
 
@@ -48,6 +49,7 @@ class MainActivity : AppCompatActivity(), CardStackListener {
         setCardViewTexts()
         setCardsLeft()
         setPlayerScore()
+        setDecks()
         setPlayerCardAmounts() //TODO Todos estos metodos en uno
         //TODO ESTO ES TO CUTRE WEY
 
@@ -59,6 +61,7 @@ class MainActivity : AppCompatActivity(), CardStackListener {
 
     override fun onCardSwiped(direction: Direction) {
         Log.d("CardStackView", "onCardSwiped: p = ${manager.topPosition}, d = $direction")
+
         if (manager.topPosition == adapter.itemCount - 1) { //TODO Both cards
             manager.setCanScrollHorizontal(false) //TODO Block
             manager.setCanScrollVertical(false)
@@ -89,6 +92,12 @@ class MainActivity : AppCompatActivity(), CardStackListener {
 
     private fun setupCardStackView() {
         initialize()
+    }
+
+    private fun setDecks(){
+        var decks : MutableList<FoodCardsDeck> = model.getBoardDecks()
+        adapter.setData(decks[0].toList())
+        adapter2.setData(decks[1].toList())
     }
 
     private fun initialize() {
@@ -173,12 +182,14 @@ class MainActivity : AppCompatActivity(), CardStackListener {
 
     private fun createList(): List<FoodCard> {
         val deck = ArrayList<FoodCard>()
-        deck.add("Choripan")
-        deck.add("Salchipapa")
-        spots.add("Galletanutella")
-        spots.add("Comida no sana")
-        spots.add("La cebolla me pone cachondo")
-        spots.add("Miau?")
+        deck.add(FoodCard(FoodCardTypes.DAIRY))
+        deck.add(FoodCard(FoodCardTypes.SWEET))
+        deck.add(FoodCard(FoodCardTypes.FISH))
+        deck.add(FoodCard(FoodCardTypes.CEREAL))
+        deck.add(FoodCard(FoodCardTypes.MEAT))
+        deck.add(FoodCard(FoodCardTypes.FORK))
+        deck.add(FoodCard(FoodCardTypes.FRUIT))
+        deck.add(FoodCard(FoodCardTypes.BLANK))
         return deck
     }
 

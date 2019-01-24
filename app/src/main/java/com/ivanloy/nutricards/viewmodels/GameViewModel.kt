@@ -3,6 +3,7 @@ package com.ivanloy.nutricards.viewmodels
 import androidx.lifecycle.ViewModel
 import com.ivanloy.nutricards.controllers.GameController
 import com.ivanloy.nutricards.controllers.GameControllerI
+import com.ivanloy.nutricards.ds.FoodCardsDeck
 import com.ivanloy.nutricards.ds.Hand
 import com.ivanloy.nutricards.gamedata.FoodCardTypes
 import com.ivanloy.nutricards.gamedata.NumPlayers
@@ -30,6 +31,10 @@ class GameViewModel : ViewModel(), GameControllerI{
 
     fun getBoard() : Hand<FoodCard>{
         return gameController.board
+    }
+
+    override fun getBoardDecks(): MutableList<FoodCardsDeck> {
+        return gameController.getBoardDecks()
     }
 
     override fun getCardAmountOfType(type: FoodCardTypes): Int {
