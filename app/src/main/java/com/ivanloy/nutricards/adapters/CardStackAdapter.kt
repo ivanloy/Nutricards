@@ -27,7 +27,6 @@ class CardStackAdapter(
     override fun onBindViewHolder(holder: ViewHolder, position: Int) {
         val card : String = cards[position].type.toString()
 
-        holder.type.text = card
         Glide.with(context)
                 .load(getCardImage(cards[position].type))
                 .into(holder.image)
@@ -62,15 +61,15 @@ class CardStackAdapter(
         var ret : Int
 
         when(type) {
-            FoodCardTypes.SWEET -> ret = R.drawable.donnut
-            FoodCardTypes.FRUIT -> ret = R.drawable.apple
-            FoodCardTypes.VEGETABLE -> ret = R.drawable.card_back
-            FoodCardTypes.DAIRY -> ret = R.drawable.milk
-            FoodCardTypes.FISH -> ret = R.drawable.sushi
-            FoodCardTypes.FORK -> ret = R.drawable.fork
-            FoodCardTypes.MEAT -> ret = R.drawable.steak
-            FoodCardTypes.CEREAL -> ret = R.drawable.cereal
-            FoodCardTypes.PASTA -> ret = R.drawable.cereal
+            FoodCardTypes.SWEET -> ret = R.drawable.donut2
+            FoodCardTypes.FRUIT -> ret = R.drawable.apple2
+            FoodCardTypes.VEGETABLE -> ret = R.drawable.onion2
+            FoodCardTypes.DAIRY -> ret = R.drawable.milk2
+            FoodCardTypes.FISH -> ret = R.drawable.salmon2
+            FoodCardTypes.FORK -> ret = R.drawable.fork2
+            FoodCardTypes.MEAT -> ret = R.drawable.bife2
+            FoodCardTypes.CEREAL -> ret = R.drawable.cereal2
+            FoodCardTypes.PASTA -> ret = R.drawable.cereal2
             else -> ret = R.drawable.card_back
         }
 
@@ -78,7 +77,6 @@ class CardStackAdapter(
     }
 
     class ViewHolder(view: View) : RecyclerView.ViewHolder(view) {
-        val type: TextView = view.findViewById(R.id.card_type)
         val image: RoundedImageView = view.findViewById(R.id.card_image)
     }
 

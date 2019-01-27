@@ -89,13 +89,9 @@ class MainActivity : AppCompatActivity(), CardStackListener {
     }
 
     override fun onCardAppeared(view: View, position: Int) {
-        val textView = view.findViewById<TextView>(R.id.card_type)
-        Log.d("CardStackView", "onCardAppeared: ($position) ${textView.text}")
     }
 
     override fun onCardDisappeared(view: View, position: Int) {
-        val textView = view.findViewById<TextView>(R.id.card_type)
-        Log.d("CardStackView", "onCardDisappeared: ($position) ${textView.text}")
     }
 
     private fun setupCardStackView() {
