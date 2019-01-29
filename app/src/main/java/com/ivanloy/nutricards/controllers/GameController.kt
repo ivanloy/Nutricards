@@ -10,7 +10,6 @@ import com.ivanloy.nutricards.gameelements.FoodCard
 class GameController(val numPlayers: NumPlayers = NumPlayers.DEFAULT) : GameControllerI
 {
 
-
     var deck : FoodCardsDeck
     var hands : MutableList< Hand< FoodCard >>
     var board : Hand< FoodCard >
@@ -31,6 +30,34 @@ class GameController(val numPlayers: NumPlayers = NumPlayers.DEFAULT) : GameCont
 
     var currentPlayer : Int = 0
         private set
+
+
+    override fun getBoardDecks(): MutableList<FoodCardsDeck> {
+        var ret : MutableList<FoodCardsDeck> = ArrayList()
+        var player : Int = 0;
+
+        for(i in 0..numPlayers.nPlayers) ret.add(FoodCardsDeck())
+
+        deck.shuffle()
+
+        while(!deck.isEmpty){
+            ret[player].push(deck.drawCard())
+            player++
+            if(player >= numPlayers.nPlayers) player = 0
+        }
+
+        for(d in ret) d.putCardOnBottom(FoodCardTypes.BLANK)
+
+        return ret
+    }
+
+    override fun addCardToCurrentPlayerHand(card: FoodCard) {
+        hands[currentPlayer].addCard(card)
+    }
+    
+    override fun addCardToCurrentPlayerHand(type: FoodCardTypes) {
+        hands[currentPlayer].addCard(FoodCard(type))
+    }
 
     override fun getCardAmountOfType(type: FoodCardTypes): Int {
         return(PointsCalculator.getCardsMap(hands[currentPlayer])[type] ?: 0) //TODO Get map to another class
@@ -63,14 +90,12 @@ class GameController(val numPlayers: NumPlayers = NumPlayers.DEFAULT) : GameCont
     }
 
     override fun fillBoard() : Boolean{
-        var ret = false
         board = Hand()
         repeat(numPlayers.nPlayers) {
             if (!deck.isEmpty) board.addCard(deck.drawCard())
             else board.addCard(FoodCard(FoodCardTypes.BLANK))
         }
-        ret = true
-        return ret
+        return true
     }
 
     override fun getCurrentPlayerHand(): Hand<FoodCard> {

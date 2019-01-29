@@ -1,5 +1,11 @@
 package com.ivanloy.nutricards.ds;
 
+import com.ivanloy.nutricards.gameelements.FoodCard;
+
+import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.List;
+
 /**
  * FIFO Queue data structure
  *
@@ -17,6 +23,10 @@ public class Stequeue<T>{ //TODO Iterator, doc, refactor, invertir push/draw/enq
         size = 0;
         queue = (T[]) new Object[2];
 
+    }
+
+    public List<T> toList(){
+        return Arrays.asList(Arrays.copyOfRange(queue, 0, size));
     }
 
     public Stequeue(int initialSize) {
