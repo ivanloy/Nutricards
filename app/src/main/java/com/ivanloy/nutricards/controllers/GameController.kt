@@ -31,6 +31,7 @@ class GameController(val numPlayers: NumPlayers = NumPlayers.DEFAULT) : GameCont
     var currentPlayer : Int = 0
         private set
 
+
     override fun getBoardDecks(): MutableList<FoodCardsDeck> {
         var ret : MutableList<FoodCardsDeck> = ArrayList()
         var player : Int = 0;
@@ -52,6 +53,10 @@ class GameController(val numPlayers: NumPlayers = NumPlayers.DEFAULT) : GameCont
 
     override fun addCardToCurrentPlayerHand(card: FoodCard) {
         hands[currentPlayer].addCard(card)
+    }
+    
+    override fun addCardToCurrentPlayerHand(type: FoodCardTypes) {
+        hands[currentPlayer].addCard(FoodCard(type))
     }
 
     override fun getCardAmountOfType(type: FoodCardTypes): Int {

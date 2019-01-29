@@ -13,10 +13,12 @@
 
         <com.makeramen.roundedimageview.RoundedImageView
             android:id="@+id/card_image"
+            android:contentDescription="BLANK"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
             app:riv_corner_radius="20dp"
             android:scaleType="centerCrop"
             android:layout_margin="0dp"/>
+
 
 </androidx.cardview.widget.CardView>

@@ -33,6 +33,10 @@ class GameViewModel : ViewModel(), GameControllerI{
         return gameController.board
     }
 
+    override fun addCardToCurrentPlayerHand(type: FoodCardTypes) {
+        return gameController.addCardToCurrentPlayerHand(type)
+    }
+
     override fun addCardToCurrentPlayerHand(card: FoodCard) {
         return gameController.addCardToCurrentPlayerHand(card)
     }

@@ -4,8 +4,6 @@ import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.util.Log
 import android.view.View
-import android.widget.TextView
-import androidx.drawerlayout.widget.DrawerLayout
 import androidx.lifecycle.ViewModelProviders
 import androidx.recyclerview.widget.DefaultItemAnimator
 import com.ivanloy.nutricards.adapters.CardStackAdapter
@@ -15,6 +13,7 @@ import com.ivanloy.nutricards.gamedata.NumPlayers
 import com.ivanloy.nutricards.gameelements.FoodCard
 import com.ivanloy.nutricards.util.TextUtil
 import com.ivanloy.nutricards.viewmodels.GameViewModel
+import com.makeramen.roundedimageview.RoundedImageView
 import com.yuyakaido.android.cardstackview.*
 import kotlinx.android.synthetic.main.activity_main.*
 import java.util.ArrayList
@@ -60,15 +59,6 @@ class MainActivity : AppCompatActivity(), CardStackListener {
     }
 
     override fun onCardSwiped(direction: Direction) {
-        Log.d("CardStackView", "onCardSwiped: p = ${manager.topPosition}, d = $direction")
-
-        if(direction == Direction.Bottom){
-            model.addCardToCurrentPlayerHand(adapter.getData()[manager.topPosition])
-            setPlayerScore()
-            setPlayerCardAmounts()
-        }else{
-
-        }
 
         if (manager.topPosition == adapter.itemCount - 1) { //TODO Both cards
             manager.setCanScrollHorizontal(false) //TODO Block
@@ -92,6 +82,44 @@ class MainActivity : AppCompatActivity(), CardStackListener {
     }
 
     override fun onCardDisappeared(view: View, position: Int) {
+    }
+
+    override fun onCardManuallySwiped(view: View?, position: Int, direction: Direction?) {
+        Log.d("CardStackView", "onCard" +
+                view!!.findViewById<RoundedImageView>(R.id.card_image).contentDescription)
+
+        val typeString = view!!
+                .findViewById<RoundedImageView>(R.id.card_image)
+                .contentDescription
+                .toString()
+
+        val type : FoodCardTypes = getFoodCardTypeWithString(typeString)
+
+        if(direction == Direction.Bottom){
+            model.addCardToCurrentPlayerHand(type)
+            setPlayerScore()
+            setPlayerCardAmounts()
+        }else{
+
+        }
+
+    }
+
+    private fun getFoodCardTypeWithString(string : String) : FoodCardTypes{
+        var ret : FoodCardTypes = FoodCardTypes.BLANK
+        when(string){ //TODO Do in enum class
+            "BLANK" -> ret = FoodCardTypes.BLANK
+            "SWEET" -> ret = FoodCardTypes.SWEET
+            "MEAT" -> ret = FoodCardTypes.MEAT
+            "FISH" -> ret = FoodCardTypes.FISH
+            "FORK" -> ret = FoodCardTypes.FORK
+            "DAIRY" -> ret = FoodCardTypes.DAIRY
+            "FRUIT" -> ret = FoodCardTypes.FRUIT
+            "VEGETABLE" -> ret = FoodCardTypes.VEGETABLE
+            "PASTA" -> ret = FoodCardTypes.PASTA
+            "CEREAL" -> ret = FoodCardTypes.CEREAL
+        }
+        return ret
     }
 
     private fun setupCardStackView() {

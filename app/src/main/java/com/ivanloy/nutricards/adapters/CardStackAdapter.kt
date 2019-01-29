@@ -31,6 +31,8 @@ class CardStackAdapter(
                 .load(getCardImage(cards[position].type))
                 .into(holder.image)
 
+        holder.image.contentDescription = cards[position].type.toString()
+
         holder.itemView.setOnClickListener { v ->
             Toast.makeText(v.context, card, Toast.LENGTH_SHORT).show()
         }
