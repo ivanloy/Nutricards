@@ -104,7 +104,7 @@ public class CardStackSmoothScroller extends RecyclerView.SmoothScroller {
             case ManualSwipe:
                 state.next(CardStackState.Status.PrepareSwipeAnimation);
                 final Direction direction = state.getDirection();
-                listener.onCardManuallySwiped(manager.getTopView(), manager.getTopPosition(), direction);
+                listener.onCardManuallySwiped(manager.getTopView(), manager.getTopPosition(), direction, this.manager);
                 break;
             case ManualCancel:
                 state.next(CardStackState.Status.RewindAnimating);
