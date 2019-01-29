@@ -17,6 +17,7 @@
   <component name="ChangeListManager">
     <list default="true" id="4ee3b124-89e1-45c7-aa5d-6cd3c9df7c7a" name="Default" comment="">
 <<<<<<< Updated upstream
+<<<<<<< HEAD
       <change afterPath="$PROJECT_DIR$/.idea/libraries/Gradle__com_google_android_material_material_1_0_0_rc01.xml" afterDir="false" />
       <change afterPath="$PROJECT_DIR$/app/src/main/res/drawable/apple2.png" afterDir="false" />
       <change afterPath="$PROJECT_DIR$/app/src/main/res/drawable/bife.png" afterDir="false" />
@@ -30,6 +31,10 @@
       <change afterPath="$PROJECT_DIR$/app/src/main/res/drawable/onion2.png" afterDir="false" />
       <change afterPath="$PROJECT_DIR$/app/src/main/res/drawable/salmon.png" afterDir="false" />
       <change afterPath="$PROJECT_DIR$/app/src/main/res/drawable/salmon2.png" afterDir="false" />
+=======
+      <change afterPath="$PROJECT_DIR$/.idea/libraries/Gradle__com_lorentzos_swipecards_library_1_0_8_aar.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/app/src/main/res/layout/food_card.xml" afterDir="false" />
+>>>>>>> master
       <change beforePath="$PROJECT_DIR$/.gradle/4.10.1/fileHashes/fileHashes.bin" beforeDir="false" afterPath="$PROJECT_DIR$/.gradle/4.10.1/fileHashes/fileHashes.bin" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.gradle/4.10.1/fileHashes/fileHashes.lock" beforeDir="false" afterPath="$PROJECT_DIR$/.gradle/4.10.1/fileHashes/fileHashes.lock" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.gradle/4.10.1/fileHashes/resourceHashesCache.bin" beforeDir="false" afterPath="$PROJECT_DIR$/.gradle/4.10.1/fileHashes/resourceHashesCache.bin" afterDir="false" />
@@ -99,6 +104,13 @@
       <change beforePath="$PROJECT_DIR$/.idea/misc.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/misc.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/Nutricards.iml" beforeDir="false" afterPath="$PROJECT_DIR$/Nutricards.iml" afterDir="false" />
+<<<<<<< HEAD
+=======
+      <change beforePath="$PROJECT_DIR$/app/app.iml" beforeDir="false" afterPath="$PROJECT_DIR$/app/app.iml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/build.gradle" beforeDir="false" afterPath="$PROJECT_DIR$/app/build.gradle" afterDir="false" />
+=======
+      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+>>>>>>> master
 >>>>>>> Stashed changes
     </list>
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
@@ -256,11 +268,20 @@
         <entry file="file://$PROJECT_DIR$/app/src/main/java/com/ivanloy/nutricards/controllers/GameControllerI.kt">
           <provider selected="true" editor-type-id="text-editor">
 <<<<<<< Updated upstream
+<<<<<<< HEAD
             <state relative-caret-position="289">
 =======
             <state relative-caret-position="255">
 >>>>>>> Stashed changes
               <caret line="21" column="44" selection-start-line="21" selection-start-column="44" selection-end-line="21" selection-end-column="44" />
+=======
+            <state relative-caret-position="540">
+              <caret line="41" selection-start-line="41" selection-end-line="41" />
+=======
+            <state relative-caret-position="365">
+              <caret line="81" column="21" selection-start-line="81" selection-start-column="21" selection-end-line="81" selection-end-column="21" />
+>>>>>>> Stashed changes
+>>>>>>> master
             </state>
           </provider>
         </entry>
@@ -3018,8 +3039,15 @@
   </component>
   <component name="ToolWindowManager">
 <<<<<<< Updated upstream
+<<<<<<< HEAD
     <frame x="-8" y="-8" width="1936" height="1056" extended-state="7" />
+=======
+    <frame x="1433" y="27" width="1299" height="741" extended-state="0" />
+>>>>>>> master
     <editor active="true" />
+=======
+    <frame x="-8" y="-8" width="1936" height="1056" extended-state="6" />
+>>>>>>> Stashed changes
     <layout>
       <window_info anchor="bottom" id="Android Profiler" order="8" weight="0.32952693" />
       <window_info anchor="bottom" id="TODO" order="6" />
@@ -3516,6 +3544,7 @@
         <state />
       </provider>
       <provider selected="true" editor-type-id="text-editor">
+<<<<<<< HEAD
         <state relative-caret-position="289">
           <caret line="17" column="37" selection-start-line="17" selection-start-column="37" selection-end-line="17" selection-end-column="37" />
         </state>
@@ -3531,6 +3560,14 @@
 =======
         <state relative-caret-position="255">
           <caret line="21" selection-start-line="21" selection-end-line="21" />
+=======
+<<<<<<< Updated upstream
+        <state relative-caret-position="195">
+          <caret line="16" column="38" selection-start-line="16" selection-start-column="38" selection-end-line="16" selection-end-column="38" />
+=======
+        <state relative-caret-position="365">
+          <caret line="81" column="21" selection-start-line="81" selection-start-column="21" selection-end-line="81" selection-end-column="21" />
+>>>>>>> master
 >>>>>>> Stashed changes
         </state>
       </provider>
