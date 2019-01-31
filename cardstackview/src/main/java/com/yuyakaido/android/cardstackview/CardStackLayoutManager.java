@@ -114,6 +114,7 @@ public class CardStackLayoutManager
                     // https://github.com/yuyakaido/CardStackView/issues/175
                     // https://github.com/yuyakaido/CardStackView/issues/181
                     state.next(CardStackState.Status.Idle);
+                    smoothScrollToNext(state.targetPosition);
                     state.targetPosition = RecyclerView.NO_POSITION;
                 }
                 break;
@@ -242,7 +243,7 @@ public class CardStackLayoutManager
         }
 
         if (state.status == CardStackState.Status.Dragging) {
-            listener.onCardDragging(state.getDirection(), state.getRatio());
+            listener.onCardDragging(state.getDirection(), state.getRatio(), this);
         }
     }
 

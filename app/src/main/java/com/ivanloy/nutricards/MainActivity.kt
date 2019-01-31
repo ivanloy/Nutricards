@@ -55,11 +55,14 @@ class MainActivity : AppCompatActivity(), CardStackListener {
 
     }
 
-    override fun onCardDragging(direction: Direction, ratio: Float) {
-        //Log.d("CardStackView", "onCardDragging: d = ${direction.name}, r = $ratio")
+    override fun onCardDragging(direction: Direction, ratio: Float, layoutManager: CardStackLayoutManager) {
+        getOppositeManager(layoutManager)!!.setCanScrollHorizontal(false) //TODO Call once
+        getOppositeManager(layoutManager)!!.setCanScrollVertical(false)
     }
 
     override fun onCardSwiped(direction: Direction) {
+
+
 
         if (manager.topPosition == adapter.itemCount - 1) { //TODO Both cards
             manager.setCanScrollHorizontal(false) //TODO Block
@@ -76,13 +79,20 @@ class MainActivity : AppCompatActivity(), CardStackListener {
     }
 
     override fun onCardCanceled() {
-        Log.d("CardStackView", "onCardCanceled: ${manager.topPosition}")
+        manager.setCanScrollHorizontal(true) //TODO Only affected, method
+        manager.setCanScrollVertical(true)
+        manager2.setCanScrollHorizontal(true)
+        manager2.setCanScrollVertical(true)
     }
 
     override fun onCardAppeared(view: View, position: Int) {
     }
 
     override fun onCardDisappeared(view: View, position: Int) {
+        manager.setCanScrollHorizontal(true) //TODO Only affected, method
+        manager.setCanScrollVertical(true)
+        manager2.setCanScrollHorizontal(true)
+        manager2.setCanScrollVertical(true)
     }
 
     override fun onCardManuallySwiped(
@@ -121,6 +131,15 @@ class MainActivity : AppCompatActivity(), CardStackListener {
         return ret
     }
 
+    private fun getOppositeManager(layoutManager : CardStackLayoutManager) : CardStackLayoutManager? { //TODO Pruebas
+        var ret : CardStackLayoutManager? = null
+        when(layoutManager){
+            manager -> ret = manager2
+            manager2 -> ret = manager
+        }
+        return ret
+    }
+
     private fun swipeCardUp(layoutManager : CardStackLayoutManager){
         val setting = SwipeAnimationSetting.Builder()
                 .setDirection(Direction.Top)
@@ -143,7 +162,7 @@ class MainActivity : AppCompatActivity(), CardStackListener {
 
         val stackView : CardStackView = getLastCardStackView(layoutManager)!!
 
-        val typeString = manager-//CORREGIR
+        val typeString = manager//CORREGIR
                 .topView
                 .findViewById<RoundedImageView>(R.id.card_image)
                 .contentDescription
