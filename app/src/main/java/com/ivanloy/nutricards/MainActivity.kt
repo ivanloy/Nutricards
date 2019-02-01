@@ -2,9 +2,7 @@ package com.ivanloy.nutricards
 
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
-import android.os.Handler
 import android.util.Log
-import android.view.MotionEvent
 import android.view.View
 import android.view.WindowManager
 import android.view.animation.AccelerateInterpolator
@@ -20,7 +18,6 @@ import com.ivanloy.nutricards.viewmodels.GameViewModel
 import com.makeramen.roundedimageview.RoundedImageView
 import com.yuyakaido.android.cardstackview.*
 import kotlinx.android.synthetic.main.activity_main.*
-import androidx.core.os.HandlerCompat.postDelayed
 import java.util.*
 
 
@@ -39,8 +36,7 @@ class MainActivity : AppCompatActivity(), CardStackListener {
     private val cardStackView2 by lazy { findViewById<CardStackView>(R.id.cv_foodCardOption2) }
     private val manager2 by lazy { CardStackLayoutManager(this, this) }
     private val adapter2 by lazy { CardStackAdapter(this) }
-
-    var deckSize : Int = 0
+    private var stackView : CardStackView? = null
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -67,8 +63,6 @@ class MainActivity : AppCompatActivity(), CardStackListener {
 
     override fun onCardSwiped(direction: Direction) {
 
-
-
         if (manager.topPosition == adapter.itemCount - 1) { //TODO Both cards
             manager.setCanScrollHorizontal(false) //TODO Block
             manager.setCanScrollVertical(false)
@@ -91,15 +85,17 @@ class MainActivity : AppCompatActivity(), CardStackListener {
         manager2.setCanScrollVertical(true)
     }
 
-    override fun onCardAppeared(view: View, position: Int) {
+    override fun onCardAppeared(view: View, position: Int, layoutManager: CardStackLayoutManager) {
+        if(getStackViewWithManager(layoutManager) == stackView) {
+            window.clearFlags(WindowManager.LayoutParams.FLAG_NOT_TOUCHABLE)
+            stackView = null
+        }
     }
 
-    override fun onCardReleased() {
+    override fun onCardReleased() { //TODO Fix only call once
         window.setFlags(WindowManager.LayoutParams.FLAG_NOT_TOUCHABLE,
-                WindowManager.LayoutParams.FLAG_NOT_TOUCHABLE)
-        Handler().postDelayed({
-            window.clearFlags(WindowManager.LayoutParams.FLAG_NOT_TOUCHABLE)
-        }, 210) //TODO MEthod
+                WindowManager.LayoutParams.FLAG_NOT_TOUCHABLE) //TODO Method
+
     }
 
     override fun onCardDisappeared(view: View, position: Int) {
@@ -118,6 +114,9 @@ class MainActivity : AppCompatActivity(), CardStackListener {
         Log.d("CardStackView", "onCard" +
                 view!!.findViewById<RoundedImageView>(R.id.card_image).contentDescription)
 
+
+
+        stackView = getLastCardStackView(layoutManager)!!
 
         val typeString = view!!
                 .findViewById<RoundedImageView>(R.id.card_image)
@@ -142,6 +141,15 @@ class MainActivity : AppCompatActivity(), CardStackListener {
         when(layoutManager){
             manager -> ret = cardStackView2
             manager2 -> ret = cardStackView
+        }
+        return ret
+    }
+
+    private fun getStackViewWithManager(layoutManager : CardStackLayoutManager) : CardStackView? {
+        var ret : CardStackView? = null
+        when(layoutManager){
+            manager -> ret = cardStackView
+            manager2 -> ret = cardStackView2
         }
         return ret
     }
@@ -177,7 +185,7 @@ class MainActivity : AppCompatActivity(), CardStackListener {
 
         val stackView : CardStackView = getLastCardStackView(layoutManager)!!
 
-        val typeString = manager//CORREGIR
+        val typeString = getOppositeManager(layoutManager)!!//CORREGIR, viewmodel
                 .topView
                 .findViewById<RoundedImageView>(R.id.card_image)
                 .contentDescription
@@ -185,6 +193,8 @@ class MainActivity : AppCompatActivity(), CardStackListener {
 
         val type : FoodCardTypes = getFoodCardTypeWithString(typeString)
         model.addCardToCurrentPlayerHand(type)
+        setPlayerScore()
+        setPlayerCardAmounts() //TODO MEthod
         stackView.swipe()
     }
 

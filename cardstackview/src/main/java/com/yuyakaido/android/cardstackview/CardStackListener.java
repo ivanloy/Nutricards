@@ -8,7 +8,7 @@ public interface CardStackListener {
     void onCardRewound();
     void onCardCanceled();
     void onCardReleased();
-    void onCardAppeared(View view, int position);
+    void onCardAppeared(View view, int position, CardStackLayoutManager layoutManager);
     void onCardDisappeared(View view, int position);
     void onCardManuallySwiped(View view, int position, Direction direction, CardStackLayoutManager layoutManager);
 
@@ -24,7 +24,7 @@ public interface CardStackListener {
         @Override
         public void onCardCanceled() {}
         @Override
-        public void onCardAppeared(View view, int position) {}
+        public void onCardAppeared(View view, int position, CardStackLayoutManager layoutManager) {}
         @Override
         public void onCardDisappeared(View view, int position) {}
         @Override

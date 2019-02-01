@@ -49,7 +49,7 @@ public class CardStackLayoutManager
     public void onLayoutChildren(RecyclerView.Recycler recycler, RecyclerView.State s) {
         update(recycler);
         if (s.didStructureChange()) {
-            listener.onCardAppeared(getTopView(), state.topPosition);
+            listener.onCardAppeared(getTopView(), state.topPosition, this);
         }
     }
 
@@ -197,14 +197,16 @@ public class CardStackLayoutManager
         if (state.status == CardStackState.Status.PrepareSwipeAnimation && (state.targetPosition == RecyclerView.NO_POSITION || state.topPosition < state.targetPosition)) {
             listener.onCardReleased();
             if (Math.abs(state.dx) > getWidth() || Math.abs(state.dy) > getHeight()) {
+
                 state.next(CardStackState.Status.SwipeAnimating);
                 state.topPosition++;
                 final Direction direction = state.getDirection();
+                final CardStackLayoutManager manager = this;
                 new Handler().post(new Runnable() {
                     @Override
                     public void run() {
                         listener.onCardSwiped(direction);
-                        listener.onCardAppeared(getTopView(), state.topPosition);
+                        listener.onCardAppeared(getTopView(), state.topPosition, manager);
                     }
                 });
                 state.dx = 0;
