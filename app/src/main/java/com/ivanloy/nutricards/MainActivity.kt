@@ -94,6 +94,14 @@ class MainActivity : AppCompatActivity(), CardStackListener {
     override fun onCardAppeared(view: View, position: Int) {
     }
 
+    override fun onCardReleased() {
+        window.setFlags(WindowManager.LayoutParams.FLAG_NOT_TOUCHABLE,
+                WindowManager.LayoutParams.FLAG_NOT_TOUCHABLE)
+        Handler().postDelayed({
+            window.clearFlags(WindowManager.LayoutParams.FLAG_NOT_TOUCHABLE)
+        }, 210) //TODO MEthod
+    }
+
     override fun onCardDisappeared(view: View, position: Int) {
         manager.setCanScrollHorizontal(true) //TODO Only affected, method
         manager.setCanScrollVertical(true)
@@ -109,6 +117,7 @@ class MainActivity : AppCompatActivity(), CardStackListener {
 
         Log.d("CardStackView", "onCard" +
                 view!!.findViewById<RoundedImageView>(R.id.card_image).contentDescription)
+
 
         val typeString = view!!
                 .findViewById<RoundedImageView>(R.id.card_image)
@@ -149,23 +158,18 @@ class MainActivity : AppCompatActivity(), CardStackListener {
     private fun swipeCardUp(layoutManager : CardStackLayoutManager){
         val setting = SwipeAnimationSetting.Builder()
                 .setDirection(Direction.Top)
-                .setDuration(1)
+                .setDuration(500)
                 .setInterpolator(AccelerateInterpolator())
                 .build()
         manager.setSwipeAnimationSetting(setting)
         manager2.setSwipeAnimationSetting(setting)
-        //window.setFlags(WindowManager.LayoutParams.FLAG_NOT_TOUCHABLE,
-        //        WindowManager.LayoutParams.FLAG_NOT_TOUCHABLE)
-       // Handler().postDelayed({
-       //     window.clearFlags(WindowManager.LayoutParams.FLAG_NOT_TOUCHABLE)
-       // }, 210) //TODO MEthod
         getLastCardStackView(layoutManager)!!.swipe()
     }
 
     private fun swipeCardDown(layoutManager : CardStackLayoutManager){
         val setting = SwipeAnimationSetting.Builder()
                 .setDirection(Direction.Bottom)
-                .setDuration(1)
+                .setDuration(500)
                 .setInterpolator(AccelerateInterpolator())
                 .build()
         manager.setSwipeAnimationSetting(setting)
@@ -181,11 +185,6 @@ class MainActivity : AppCompatActivity(), CardStackListener {
 
         val type : FoodCardTypes = getFoodCardTypeWithString(typeString)
         model.addCardToCurrentPlayerHand(type)
-       // window.setFlags(WindowManager.LayoutParams.FLAG_NOT_TOUCHABLE,
-      //          WindowManager.LayoutParams.FLAG_NOT_TOUCHABLE) //TODO MEthod
-       // Handler().postDelayed({
-       //     window.clearFlags(WindowManager.LayoutParams.FLAG_NOT_TOUCHABLE)
-       // }, 210)
         stackView.swipe()
     }
 

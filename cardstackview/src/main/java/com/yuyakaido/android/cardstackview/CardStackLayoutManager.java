@@ -195,6 +195,7 @@ public class CardStackLayoutManager
         state.height = getHeight();
 
         if (state.status == CardStackState.Status.PrepareSwipeAnimation && (state.targetPosition == RecyclerView.NO_POSITION || state.topPosition < state.targetPosition)) {
+            listener.onCardReleased();
             if (Math.abs(state.dx) > getWidth() || Math.abs(state.dy) > getHeight()) {
                 state.next(CardStackState.Status.SwipeAnimating);
                 state.topPosition++;

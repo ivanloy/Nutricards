@@ -7,6 +7,7 @@ public interface CardStackListener {
     void onCardSwiped(Direction direction);
     void onCardRewound();
     void onCardCanceled();
+    void onCardReleased();
     void onCardAppeared(View view, int position);
     void onCardDisappeared(View view, int position);
     void onCardManuallySwiped(View view, int position, Direction direction, CardStackLayoutManager layoutManager);
@@ -18,6 +19,8 @@ public interface CardStackListener {
         public void onCardSwiped(Direction direction) {}
         @Override
         public void onCardRewound() {}
+        @Override
+        public void onCardReleased() {}
         @Override
         public void onCardCanceled() {}
         @Override
