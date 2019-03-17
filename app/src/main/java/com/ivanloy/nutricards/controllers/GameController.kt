@@ -59,6 +59,12 @@ class GameController(val numPlayers: NumPlayers = NumPlayers.DEFAULT) : GameCont
         hands[currentPlayer].addCard(FoodCard(type))
     }
 
+    override fun addCardToNextPlayerHand(type: FoodCardTypes) {
+        var nPlayer = 0
+        if(currentPlayer == numPlayers.nPlayers - 1) nPlayer = 0 else nPlayer = currentPlayer + 1
+        hands[nPlayer].addCard(FoodCard(type))
+    }
+
     override fun getCardAmountOfType(type: FoodCardTypes): Int {
         return(PointsCalculator.getCardsMap(hands[currentPlayer])[type] ?: 0) //TODO Get map to another class
     }

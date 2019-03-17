@@ -2,6 +2,7 @@ package com.ivanloy.nutricards
 
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
+import android.os.Handler
 import android.util.Log
 import android.view.View
 import android.view.WindowManager
@@ -19,6 +20,9 @@ import com.makeramen.roundedimageview.RoundedImageView
 import com.yuyakaido.android.cardstackview.*
 import kotlinx.android.synthetic.main.activity_main.*
 import java.util.*
+import androidx.core.os.HandlerCompat.postDelayed
+
+
 
 
 class MainActivity : AppCompatActivity(), CardStackListener {
@@ -63,6 +67,7 @@ class MainActivity : AppCompatActivity(), CardStackListener {
 
     override fun onCardSwiped(direction: Direction) {
 
+
         if (manager.topPosition == adapter.itemCount - 1) { //TODO Both cards
             manager.setCanScrollHorizontal(false) //TODO Block
             manager.setCanScrollVertical(false)
@@ -86,16 +91,10 @@ class MainActivity : AppCompatActivity(), CardStackListener {
     }
 
     override fun onCardAppeared(view: View, position: Int, layoutManager: CardStackLayoutManager) {
-        if(getStackViewWithManager(layoutManager) == stackView) {
-            window.clearFlags(WindowManager.LayoutParams.FLAG_NOT_TOUCHABLE)
             stackView = null
-        }
     }
 
     override fun onCardReleased() { //TODO Fix only call once
-        window.setFlags(WindowManager.LayoutParams.FLAG_NOT_TOUCHABLE,
-                WindowManager.LayoutParams.FLAG_NOT_TOUCHABLE) //TODO Method
-
     }
 
     override fun onCardDisappeared(view: View, position: Int) {
@@ -114,7 +113,8 @@ class MainActivity : AppCompatActivity(), CardStackListener {
         Log.d("CardStackView", "onCard" +
                 view!!.findViewById<RoundedImageView>(R.id.card_image).contentDescription)
 
-
+        window.setFlags(WindowManager.LayoutParams.FLAG_NOT_TOUCHABLE,
+                WindowManager.LayoutParams.FLAG_NOT_TOUCHABLE) //TODO Method
 
         stackView = getLastCardStackView(layoutManager)!!
 
@@ -131,8 +131,66 @@ class MainActivity : AppCompatActivity(), CardStackListener {
             setPlayerScore()
             setPlayerCardAmounts()
         }else{
+            model.addCardToNextPlayerHand(type)
             swipeCardDown(layoutManager)
         }
+
+        model.nextPlayer()
+        if(model.getCurrentPlayer() != 0) randomAISwipe()
+        model.nextPlayer()
+    }
+
+    private fun randomAISwipe() {
+
+        if(model.getCurrentDeckSize() < 2) return
+
+        window.setFlags(WindowManager.LayoutParams.FLAG_NOT_TOUCHABLE,
+                WindowManager.LayoutParams.FLAG_NOT_TOUCHABLE) //TODO Method
+
+
+        Handler().postDelayed({
+
+            val typeString = manager//CORREGIR, viewmodel
+                    .topView
+                    .findViewById<RoundedImageView>(R.id.card_image)
+                    .contentDescription
+                    .toString()
+            val typeString2 = manager2//CORREGIR, viewmodel
+                    .topView
+                    .findViewById<RoundedImageView>(R.id.card_image)
+                    .contentDescription
+                    .toString()
+            val type : FoodCardTypes = getFoodCardTypeWithString(typeString)
+            val type2 : FoodCardTypes = getFoodCardTypeWithString(typeString2)
+
+
+            var random = Random()
+            var randInt = random.nextInt(2)
+
+            when(randInt){
+                0 -> {
+                    model.addCardToNextPlayerHand(type)
+                    model.addCardToCurrentPlayerHand(type2)
+                    manager.setSwipeAnimationSetting(getTopSwipeAnimationSetting())
+                    manager2.setSwipeAnimationSetting(getBottomSwipeAnimationSetting())
+                }
+                1 -> {
+                    model.addCardToNextPlayerHand(type2)
+                    model.addCardToCurrentPlayerHand(type)
+                    manager.setSwipeAnimationSetting(getBottomSwipeAnimationSetting())
+                    manager2.setSwipeAnimationSetting(getTopSwipeAnimationSetting())
+                }
+            }
+            cardStackView!!.swipe()
+            cardStackView2!!.swipe()
+            setPlayerCardAmounts()
+            setPlayerScore()
+            Handler().postDelayed({
+                window.clearFlags(WindowManager.LayoutParams.FLAG_NOT_TOUCHABLE)
+            }, 300)
+
+        }
+                , 600)
 
     }
 
@@ -164,22 +222,33 @@ class MainActivity : AppCompatActivity(), CardStackListener {
     }
 
     private fun swipeCardUp(layoutManager : CardStackLayoutManager){
+        val setting = getTopSwipeAnimationSetting()
+        manager.setSwipeAnimationSetting(setting)
+        manager2.setSwipeAnimationSetting(setting)
+
+        val typeString = getOppositeManager(layoutManager)!!//CORREGIR, viewmodel
+                .topView
+                .findViewById<RoundedImageView>(R.id.card_image)
+                .contentDescription
+                .toString()
+
+        val type : FoodCardTypes = getFoodCardTypeWithString(typeString)
+        model.addCardToNextPlayerHand(type)
+
+        getLastCardStackView(layoutManager)!!.swipe()
+    }
+
+    private fun getTopSwipeAnimationSetting(): SwipeAnimationSetting {
         val setting = SwipeAnimationSetting.Builder()
                 .setDirection(Direction.Top)
                 .setDuration(500)
                 .setInterpolator(AccelerateInterpolator())
                 .build()
-        manager.setSwipeAnimationSetting(setting)
-        manager2.setSwipeAnimationSetting(setting)
-        getLastCardStackView(layoutManager)!!.swipe()
+        return setting
     }
 
     private fun swipeCardDown(layoutManager : CardStackLayoutManager){
-        val setting = SwipeAnimationSetting.Builder()
-                .setDirection(Direction.Bottom)
-                .setDuration(500)
-                .setInterpolator(AccelerateInterpolator())
-                .build()
+        val setting = getBottomSwipeAnimationSetting()
         manager.setSwipeAnimationSetting(setting)
         manager2.setSwipeAnimationSetting(setting) //TODO only 1
 
@@ -196,6 +265,15 @@ class MainActivity : AppCompatActivity(), CardStackListener {
         setPlayerScore()
         setPlayerCardAmounts() //TODO MEthod
         stackView.swipe()
+    }
+
+    private fun getBottomSwipeAnimationSetting(): SwipeAnimationSetting {
+        val setting = SwipeAnimationSetting.Builder()
+                .setDirection(Direction.Bottom)
+                .setDuration(500)
+                .setInterpolator(AccelerateInterpolator())
+                .build()
+        return setting
     }
 
     private fun getFoodCardTypeWithString(string : String) : FoodCardTypes{

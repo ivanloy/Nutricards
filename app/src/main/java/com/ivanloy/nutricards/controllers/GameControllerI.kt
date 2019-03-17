@@ -17,6 +17,7 @@ interface GameControllerI {
     fun getCurrentDeckSize() : Int
     fun addCardToCurrentPlayerHand(card : FoodCard)
     fun addCardToCurrentPlayerHand(type: FoodCardTypes)
+    fun addCardToNextPlayerHand(type: FoodCardTypes)
     fun drawCardFromBoardToCurrentPlayerHand(card : FoodCard)
     fun drawCardFromBoardToCurrentPlayerHand(index : Int)
     fun getCurrentPlayerHand() : Hand<FoodCard>

@@ -41,6 +41,9 @@ class GameViewModel : ViewModel(), GameControllerI{
         return gameController.addCardToCurrentPlayerHand(card)
     }
 
+    override fun addCardToNextPlayerHand(type: FoodCardTypes) = gameController.addCardToNextPlayerHand(type)
+
+
     override fun getBoardDecks(): MutableList<FoodCardsDeck> {
         return gameController.getBoardDecks()
     }
