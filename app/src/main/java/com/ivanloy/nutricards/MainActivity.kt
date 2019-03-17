@@ -20,9 +20,6 @@ import com.makeramen.roundedimageview.RoundedImageView
 import com.yuyakaido.android.cardstackview.*
 import kotlinx.android.synthetic.main.activity_main.*
 import java.util.*
-import androidx.core.os.HandlerCompat.postDelayed
-
-
 
 
 class MainActivity : AppCompatActivity(), CardStackListener {
@@ -50,10 +47,10 @@ class MainActivity : AppCompatActivity(), CardStackListener {
 
         model.buildGameController(NumPlayers.TWO_PLAYERS) //TODO Reinicia al girar y recrear la activity
 
-        model.fillBoard()
+        //model.fillBoard()
         setCardViewTexts()
         setCardsLeft()
-        setPlayerScore()
+        setScores()
         setDecks()
         setPlayerCardAmounts() //TODO Todos estos metodos en uno
         //TODO ESTO ES TO CUTRE WEY
@@ -128,7 +125,7 @@ class MainActivity : AppCompatActivity(), CardStackListener {
         if(direction == Direction.Bottom){
             model.addCardToCurrentPlayerHand(type)
             swipeCardUp(layoutManager)
-            setPlayerScore()
+            setScores()
             setPlayerCardAmounts()
         }else{
             model.addCardToNextPlayerHand(type)
@@ -136,17 +133,12 @@ class MainActivity : AppCompatActivity(), CardStackListener {
         }
 
         model.nextPlayer()
-        if(model.getCurrentPlayer() != 0) randomAISwipe()
+        randomAISwipe()
         model.nextPlayer()
     }
 
+
     private fun randomAISwipe() {
-
-        if(model.getCurrentDeckSize() < 2) return
-
-        window.setFlags(WindowManager.LayoutParams.FLAG_NOT_TOUCHABLE,
-                WindowManager.LayoutParams.FLAG_NOT_TOUCHABLE) //TODO Method
-
 
         Handler().postDelayed({
 
@@ -163,34 +155,35 @@ class MainActivity : AppCompatActivity(), CardStackListener {
             val type : FoodCardTypes = getFoodCardTypeWithString(typeString)
             val type2 : FoodCardTypes = getFoodCardTypeWithString(typeString2)
 
+            if(type != FoodCardTypes.BLANK && type2 != FoodCardTypes.BLANK) {
 
-            var random = Random()
-            var randInt = random.nextInt(2)
+                var random = Random()
+                var randInt = random.nextInt(2)
 
-            when(randInt){
-                0 -> {
-                    model.addCardToNextPlayerHand(type)
-                    model.addCardToCurrentPlayerHand(type2)
-                    manager.setSwipeAnimationSetting(getTopSwipeAnimationSetting())
-                    manager2.setSwipeAnimationSetting(getBottomSwipeAnimationSetting())
+                when (randInt) {
+                    0 -> {
+                        model.addCardToNextPlayerHand(type)
+                        model.addCardToCurrentPlayerHand(type2)
+                        manager.setSwipeAnimationSetting(getTopSwipeAnimationSetting())
+                        manager2.setSwipeAnimationSetting(getBottomSwipeAnimationSetting())
+                    }
+                    1 -> {
+                        model.addCardToNextPlayerHand(type2)
+                        model.addCardToCurrentPlayerHand(type)
+                        manager.setSwipeAnimationSetting(getBottomSwipeAnimationSetting())
+                        manager2.setSwipeAnimationSetting(getTopSwipeAnimationSetting())
+                    }
                 }
-                1 -> {
-                    model.addCardToNextPlayerHand(type2)
-                    model.addCardToCurrentPlayerHand(type)
-                    manager.setSwipeAnimationSetting(getBottomSwipeAnimationSetting())
-                    manager2.setSwipeAnimationSetting(getTopSwipeAnimationSetting())
-                }
+                cardStackView!!.swipe()
+                cardStackView2!!.swipe()
+                setPlayerCardAmounts()
+                setScores()
             }
-            cardStackView!!.swipe()
-            cardStackView2!!.swipe()
-            setPlayerCardAmounts()
-            setPlayerScore()
             Handler().postDelayed({
                 window.clearFlags(WindowManager.LayoutParams.FLAG_NOT_TOUCHABLE)
             }, 300)
 
-        }
-                , 600)
+        }, 600)
 
     }
 
@@ -262,7 +255,7 @@ class MainActivity : AppCompatActivity(), CardStackListener {
 
         val type : FoodCardTypes = getFoodCardTypeWithString(typeString)
         model.addCardToCurrentPlayerHand(type)
-        setPlayerScore()
+        setScores()
         setPlayerCardAmounts() //TODO MEthod
         stackView.swipe()
     }
@@ -350,9 +343,11 @@ class MainActivity : AppCompatActivity(), CardStackListener {
                 .fromHtml("<big>$currentDeckSize</big>/<small>$initialDeckSize</small>");
     }
 
-    fun setPlayerScore(){
+    fun setScores(){
         tv_playerScore.text = model
-                .calculateCurrentPlayerScore().toString()
+                .calculatePlayerScore().toString()
+        tv_aiScore.text = model
+                .calculateAIScore().toString()
     }
 
     fun setPlayerCardAmounts(){

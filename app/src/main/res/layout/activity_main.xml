@@ -14,14 +14,14 @@
         android:layout_marginTop="8dp"
         android:layout_marginEnd="8dp"
         android:layout_marginBottom="8dp"
-        android:orientation="horizontal"
-        android:gravity="center"
-        android:splitMotionEvents = "false"
         android:foregroundGravity="center"
+        android:gravity="center"
+        android:orientation="horizontal"
+        android:splitMotionEvents="false"
         app:layout_constraintBottom_toTopOf="@+id/tv_cardsLeftInDeck"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/tv_gameActionBar">
+        app:layout_constraintTop_toBottomOf="@+id/imageView6">
 
         <com.yuyakaido.android.cardstackview.CardStackView
             android:id="@+id/cv_foodCardOption1"
@@ -38,29 +38,6 @@
             android:layout_margin="8dp"></com.yuyakaido.android.cardstackview.CardStackView>
 
     </LinearLayout>
-
-    <TextView
-        android:id="@+id/tv_gameActionBar"
-        android:layout_width="0dp"
-        android:layout_height="50dp"
-        android:background="@color/colorPrimary"
-        android:gravity="center"
-        android:paddingLeft="20dp"
-        android:text="Holmes"
-        android:textColor="#fff"
-        android:textSize="20sp"
-        android:textStyle="italic"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
-
-    <ImageView
-        android:id="@+id/imageView"
-        android:layout_width="64dp"
-        android:layout_height="57dp"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        app:srcCompat="@drawable/score_circle" />
 
     <View
         android:id="@+id/view3"
@@ -96,19 +73,6 @@
         android:textStyle="bold"
         app:layout_constraintBottom_toTopOf="@+id/view2"
         app:layout_constraintEnd_toEndOf="parent" />
-
-    <TextView
-        android:id="@+id/tv_playerScore"
-        android:layout_width="54dp"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="8dp"
-        android:gravity="center"
-        android:text="34"
-        android:textColor="@color/colorPrimary"
-        android:textSize="26sp"
-        android:textStyle="bold"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
 
     <TextView
         android:id="@+id/FFISH"
@@ -263,5 +227,42 @@
         android:textSize="20sp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintStart_toStartOf="parent" />
+
+    <ImageView
+        android:id="@+id/imageView6"
+        android:layout_width="0dp"
+        android:layout_height="119dp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:srcCompat="@drawable/topscoreboard" />
+
+    <TextView
+        android:id="@+id/tv_playerScore"
+        android:layout_width="54dp"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="128dp"
+        android:layout_marginTop="20dp"
+        android:gravity="center"
+        android:text="34"
+        android:textColor="@android:color/black"
+        android:textSize="20sp"
+        android:textStyle="bold"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <TextView
+        android:id="@+id/tv_aiScore"
+        android:layout_width="54dp"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="20dp"
+        android:layout_marginEnd="120dp"
+        android:gravity="center"
+        android:text="34"
+        android:textColor="@android:color/black"
+        android:textSize="20sp"
+        android:textStyle="bold"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>

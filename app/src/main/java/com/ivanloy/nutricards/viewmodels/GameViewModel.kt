@@ -80,6 +80,9 @@ class GameViewModel : ViewModel(), GameControllerI{
         return gameController.fillBoard()
     }
 
+    override fun calculatePlayerScore(): Int = gameController.calculatePlayerScore()
+    override fun calculateAIScore(): Int = gameController.calculateAIScore()
+
     override fun drawCardFromBoardToCurrentPlayerHand(card: FoodCard) {
         gameController.drawCardFromBoardToCurrentPlayerHand(card)
     }

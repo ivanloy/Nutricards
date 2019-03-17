@@ -73,6 +73,15 @@ class GameController(val numPlayers: NumPlayers = NumPlayers.DEFAULT) : GameCont
         return PointsCalculator.calculateHandPoints(hands[currentPlayer])
     }
 
+    override fun calculatePlayerScore(): Int {
+        return PointsCalculator.calculateHandPoints(hands[0])
+    }
+
+    override fun calculateAIScore(): Int {
+        return PointsCalculator.calculateHandPoints(hands[1])
+    }
+
+
     override fun getCurrentDeckSize(): Int {
         return deck.size()
     }

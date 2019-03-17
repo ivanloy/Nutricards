@@ -21,6 +21,8 @@ interface GameControllerI {
     fun drawCardFromBoardToCurrentPlayerHand(card : FoodCard)
     fun drawCardFromBoardToCurrentPlayerHand(index : Int)
     fun getCurrentPlayerHand() : Hand<FoodCard>
+    fun calculatePlayerScore() : Int
+    fun calculateAIScore() : Int
     fun getBoardCard(index : Int) : FoodCard
     fun calculateCurrentPlayerScore() : Int
     fun getCardAmountOfType(type : FoodCardTypes) : Int
