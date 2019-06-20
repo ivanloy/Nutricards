@@ -49,7 +49,6 @@ class MainActivity : AppCompatActivity(), CardStackListener {
 
         //model.fillBoard()
         setCardViewTexts()
-        setCardsLeft()
         setScores()
         setDecks()
         setPlayerCardAmounts() //TODO Todos estos metodos en uno
@@ -334,14 +333,6 @@ class MainActivity : AppCompatActivity(), CardStackListener {
         }
     }
 
-    fun setCardsLeft(){
-        //TODO Live dataaaaa
-        val currentDeckSize = model.getCurrentDeckSize()
-        val initialDeckSize = model.getInitialDeckSize()
-
-        tv_cardsLeftInDeck.text = TextUtil
-                .fromHtml("<big>$currentDeckSize</big>/<small>$initialDeckSize</small>");
-    }
 
     fun setScores(){
         tv_playerScore.text = model
@@ -365,6 +356,9 @@ class MainActivity : AppCompatActivity(), CardStackListener {
                 .toString()
         tv_sweetAmount.text = model
                 .getCardAmountOfType(FoodCardTypes.SWEET)
+                .toString()
+        tv_onionAmount.text = model
+                .getCardAmountOfType(FoodCardTypes.VEGETABLE)
                 .toString()
         tv_pastaAmount.text = (
                     model.getCardAmountOfType(FoodCardTypes.PASTA) +

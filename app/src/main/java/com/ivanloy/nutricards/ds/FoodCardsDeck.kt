@@ -56,12 +56,6 @@ class FoodCardsDeck : Stequeue<FoodCard>() {
         )
 
         putCardOnTop(
-                FoodCardTypes.FORK,
-                FoodCardsDeckComposition.TWO_PLAYERS_FORK
-                        .quantity
-        )
-
-        putCardOnTop(
                 FoodCardTypes.SWEET,
                 FoodCardsDeckComposition.TWO_PLAYERS_SWEET
                         .quantity

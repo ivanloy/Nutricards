@@ -2,6 +2,7 @@ package com.ivanloy.nutricards.controllers
 
 import com.ivanloy.nutricards.ds.Hand
 import com.ivanloy.nutricards.gamedata.FoodCardTypes
+import com.ivanloy.nutricards.gamedata.FoodCardsDeckComposition
 import com.ivanloy.nutricards.gameelements.FoodCard
 
 /**
@@ -20,6 +21,7 @@ class PointsCalculator {
             total += calculateSweetPoints(cardMap[FoodCardTypes.SWEET])
             total += calculateDairyPoints(cardMap[FoodCardTypes.DAIRY])
             total += calculateFruitPoints(cardMap[FoodCardTypes.FRUIT])
+            total += calculateOnionPoints(cardMap[FoodCardTypes.VEGETABLE])
             total += calculateMeatAndFishPoints(cardMap[FoodCardTypes.MEAT], cardMap[FoodCardTypes.FISH])
 
 
@@ -35,6 +37,16 @@ class PointsCalculator {
             return ret
         }
 
+        fun calculateCerealPoints(amount: Int?) : Int {
+            if(amount == null) return 0
+            if(amount == 0) return 0
+            val total = FoodCardsDeckComposition.TWO_PLAYERS_PASTA_CEREAL.quantity
+            val half = total / 2
+            if(amount > half) return 7
+            else return 3
+
+        }
+
         fun calculateDairyPoints(amount : Int?) : Int{
             val amountNotNull = amount ?: 0
             var ret : Int = 0
@@ -46,6 +58,10 @@ class PointsCalculator {
 
         fun calculateFruitPoints(amount : Int?) : Int{
             return amount ?: 0
+        }
+
+        fun calculateOnionPoints(amount : Int?) : Int{
+            return if(amount != null) amount * 2 else 0
         }
 
         fun calculateMeatAndFishPoints(meatAmount : Int?, fishAmount : Int?) : Int{
