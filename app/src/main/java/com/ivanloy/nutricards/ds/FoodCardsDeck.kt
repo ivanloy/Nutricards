@@ -43,11 +43,6 @@ class FoodCardsDeck : Stequeue<FoodCard>() {
 
     fun buildTwoPlayersDeck(){
 
-        putCardOnTop(
-                FoodCardTypes.BLANK,
-                FoodCardsDeckComposition.TWO_PLAYERS_BLANK
-                        .quantity
-        )
 
         putCardOnTop(
                 FoodCardTypes.DAIRY,
@@ -87,12 +82,7 @@ class FoodCardsDeck : Stequeue<FoodCard>() {
         putCardOnTop(
                 FoodCardTypes.CEREAL,
                 FoodCardsDeckComposition.TWO_PLAYERS_PASTA_CEREAL
-                        .quantity / 2
-        )
-        putCardOnTop(
-                FoodCardTypes.PASTA,
-                FoodCardsDeckComposition.TWO_PLAYERS_PASTA_CEREAL
-                        .quantity / 2
+                        .quantity
         )
 
         shuffle()

@@ -23,6 +23,7 @@ class PointsCalculator {
             total += calculateFruitPoints(cardMap[FoodCardTypes.FRUIT])
             total += calculateOnionPoints(cardMap[FoodCardTypes.VEGETABLE])
             total += calculateMeatAndFishPoints(cardMap[FoodCardTypes.MEAT], cardMap[FoodCardTypes.FISH])
+            total += calculateCerealPoints(cardMap[FoodCardTypes.CEREAL])
 
 
             return total
@@ -47,7 +48,7 @@ class PointsCalculator {
 
         }
 
-        fun calculateDairyPoints(amount : Int?) : Int{
+        fun calculateFruitPoints(amount : Int?) : Int{
             val amountNotNull = amount ?: 0
             var ret : Int = 0
             if(amountNotNull == 3) ret = 8
@@ -56,7 +57,7 @@ class PointsCalculator {
             return ret
         }
 
-        fun calculateFruitPoints(amount : Int?) : Int{
+        fun calculateDairyPoints(amount : Int?) : Int{
             return amount ?: 0
         }
 

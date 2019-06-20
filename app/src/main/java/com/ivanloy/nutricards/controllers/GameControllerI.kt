@@ -27,5 +27,8 @@ interface GameControllerI {
     fun calculateCurrentPlayerScore() : Int
     fun getCardAmountOfType(type : FoodCardTypes) : Int
     fun getBoardDecks() : MutableList<FoodCardsDeck>
+    fun calculatePlayerTypeScore(type: FoodCardTypes) : Int
+    fun calculateAITypeScore(type: FoodCardTypes) : Int
+    fun getIACardAmountOfType(type: FoodCardTypes): Int
 
 }

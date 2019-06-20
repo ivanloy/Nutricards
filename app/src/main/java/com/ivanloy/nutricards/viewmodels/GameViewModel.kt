@@ -3,6 +3,7 @@ package com.ivanloy.nutricards.viewmodels
 import androidx.lifecycle.ViewModel
 import com.ivanloy.nutricards.controllers.GameController
 import com.ivanloy.nutricards.controllers.GameControllerI
+import com.ivanloy.nutricards.controllers.PointsCalculator
 import com.ivanloy.nutricards.ds.FoodCardsDeck
 import com.ivanloy.nutricards.ds.Hand
 import com.ivanloy.nutricards.gamedata.FoodCardTypes
@@ -41,9 +42,16 @@ class GameViewModel : ViewModel(), GameControllerI{
         return gameController.addCardToCurrentPlayerHand(card)
     }
 
+    override fun getIACardAmountOfType(type: FoodCardTypes): Int {
+        return gameController.getIACardAmountOfType(type)
+    }
+
     override fun addCardToNextPlayerHand(type: FoodCardTypes) = gameController.addCardToNextPlayerHand(type)
 
 
+    override fun calculateAITypeScore(type: FoodCardTypes): Int {
+        return gameController.calculateAITypeScore(type)
+    }
     override fun getBoardDecks(): MutableList<FoodCardsDeck> {
         return gameController.getBoardDecks()
     }
@@ -79,7 +87,7 @@ class GameViewModel : ViewModel(), GameControllerI{
     override fun fillBoard() : Boolean {
         return gameController.fillBoard()
     }
-
+    override fun calculatePlayerTypeScore(type: FoodCardTypes) : Int = gameController.calculatePlayerTypeScore(type)
     override fun calculatePlayerScore(): Int = gameController.calculatePlayerScore()
     override fun calculateAIScore(): Int = gameController.calculateAIScore()
 

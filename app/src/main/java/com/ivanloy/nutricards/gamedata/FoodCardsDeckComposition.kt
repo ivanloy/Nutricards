@@ -2,7 +2,7 @@ package com.ivanloy.nutricards.gamedata
 
 enum class FoodCardsDeckComposition(val quantity : Int) {
     TWO_PLAYERS_BLANK(0),
-    TWO_PLAYERS_SWEET(2),
+    TWO_PLAYERS_SWEET(3),
     TWO_PLAYERS_MEAT_FISH(8),
     TWO_PLAYERS_FORK(0),
     TWO_PLAYERS_DAIRY(10),

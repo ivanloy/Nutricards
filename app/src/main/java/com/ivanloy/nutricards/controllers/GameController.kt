@@ -66,11 +66,53 @@ class GameController(val numPlayers: NumPlayers = NumPlayers.DEFAULT) : GameCont
     }
 
     override fun getCardAmountOfType(type: FoodCardTypes): Int {
-        return(PointsCalculator.getCardsMap(hands[currentPlayer])[type] ?: 0) //TODO Get map to another class
+        return(PointsCalculator.getCardsMap(hands[0])[type] ?: 0) //TODO Get map to another class
+    }
+
+    override fun getIACardAmountOfType(type: FoodCardTypes): Int {
+        return(PointsCalculator.getCardsMap(hands[1])[type] ?: 0) //TODO Get map to another class
     }
 
     override fun calculateCurrentPlayerScore(): Int {
         return PointsCalculator.calculateHandPoints(hands[currentPlayer])
+    }
+
+    override fun calculatePlayerTypeScore(type: FoodCardTypes) : Int {
+        when(type){
+            FoodCardTypes.FRUIT ->
+                return PointsCalculator.calculateFruitPoints(getCardAmountOfType(FoodCardTypes.FRUIT))
+            FoodCardTypes.DAIRY ->
+                return PointsCalculator.calculateDairyPoints(getCardAmountOfType(FoodCardTypes.DAIRY))
+            FoodCardTypes.VEGETABLE ->
+                return PointsCalculator.calculateOnionPoints(getCardAmountOfType(FoodCardTypes.VEGETABLE))
+            FoodCardTypes.SWEET ->
+                return PointsCalculator.calculateSweetPoints(getCardAmountOfType(FoodCardTypes.SWEET))
+            FoodCardTypes.FISH ->
+                return PointsCalculator.calculateMeatAndFishPoints(getCardAmountOfType(FoodCardTypes.MEAT), getCardAmountOfType(FoodCardTypes.FISH))
+            FoodCardTypes.CEREAL ->
+                return PointsCalculator.calculateCerealPoints(getCardAmountOfType(FoodCardTypes.CEREAL))
+            else ->
+                return 0
+        }
+    }
+
+    override fun calculateAITypeScore(type: FoodCardTypes) : Int {
+        when(type){
+            FoodCardTypes.FRUIT ->
+                return PointsCalculator.calculateFruitPoints(getIACardAmountOfType(FoodCardTypes.FRUIT))
+            FoodCardTypes.DAIRY ->
+                return PointsCalculator.calculateDairyPoints(getIACardAmountOfType(FoodCardTypes.DAIRY))
+            FoodCardTypes.VEGETABLE ->
+                return PointsCalculator.calculateOnionPoints(getIACardAmountOfType(FoodCardTypes.VEGETABLE))
+            FoodCardTypes.SWEET ->
+                return PointsCalculator.calculateSweetPoints(getIACardAmountOfType(FoodCardTypes.SWEET))
+            FoodCardTypes.FISH ->
+                return PointsCalculator.calculateMeatAndFishPoints(getIACardAmountOfType(FoodCardTypes.MEAT), getIACardAmountOfType(FoodCardTypes.FISH))
+            FoodCardTypes.CEREAL ->
+                return PointsCalculator.calculateCerealPoints(getIACardAmountOfType(FoodCardTypes.CEREAL))
+            else ->
+                return 0
+        }
     }
 
     override fun calculatePlayerScore(): Int {

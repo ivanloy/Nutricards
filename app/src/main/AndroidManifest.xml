@@ -11,7 +11,7 @@
         android:theme="@style/Theme.AppCompat.Light.NoActionBar">
         <activity
             android:name=".MainActivity"
-            android:screenOrientation="portrait"></activity>
+            android:screenOrientation="portrait" />
         <activity
             android:name=".MenuActivity"
             android:screenOrientation="portrait">
@@ -21,7 +21,8 @@
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
-        <activity android:name=".TutorialActivity"></activity>
+        <activity android:name=".TutorialActivity" />
+        <activity android:name=".EndActivity" android:screenOrientation="portrait"></activity>
     </application>
 
 </manifest>

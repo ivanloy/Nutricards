@@ -1,5 +1,6 @@
 package com.ivanloy.nutricards
 
+import android.content.Intent
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.os.Handler
@@ -13,6 +14,7 @@ import com.ivanloy.nutricards.adapters.CardStackAdapter
 import com.ivanloy.nutricards.ds.FoodCardsDeck
 import com.ivanloy.nutricards.gamedata.FoodCardTypes
 import com.ivanloy.nutricards.gamedata.NumPlayers
+import com.ivanloy.nutricards.gameelements.EndGameData
 import com.ivanloy.nutricards.gameelements.FoodCard
 import com.ivanloy.nutricards.util.TextUtil
 import com.ivanloy.nutricards.viewmodels.GameViewModel
@@ -67,12 +69,105 @@ class MainActivity : AppCompatActivity(), CardStackListener {
         if (manager.topPosition == adapter.itemCount - 1) { //TODO Both cards
             manager.setCanScrollHorizontal(false) //TODO Block
             manager.setCanScrollVertical(false)
+            endGame()
         }
         if (manager2.topPosition == adapter2.itemCount - 1) { //TODO Both cards
             manager2.setCanScrollHorizontal(false) //TODO Block
             manager2.setCanScrollVertical(false)
+            endGame()
         }
 
+    }
+
+    fun endGame(){
+        val data = EndGameData()
+
+        data.message = if(model.calculatePlayerScore() > model.calculateAIScore()) "YOU WIN!" else "YOU LOSE :("
+
+        data.playerApples =
+                "x" +
+                model.getCardAmountOfType(FoodCardTypes.FRUIT).toString() +
+                "   " +
+                model.calculatePlayerTypeScore(FoodCardTypes.FRUIT).toString() +
+                " pts."
+        data.playerOnion =
+                "x" +
+                model.getCardAmountOfType(FoodCardTypes.VEGETABLE).toString() +
+                "   " +
+                model.calculatePlayerTypeScore(FoodCardTypes.VEGETABLE).toString() +
+                " pts."
+        data.playerMilk =
+                "x" +
+                model.getCardAmountOfType(FoodCardTypes.DAIRY).toString() +
+                "   " +
+                model.calculatePlayerTypeScore(FoodCardTypes.DAIRY).toString() +
+                " pts."
+        data.playerDonut =
+                "x" +
+                model.getCardAmountOfType(FoodCardTypes.SWEET).toString() +
+                "   " +
+                model.calculatePlayerTypeScore(FoodCardTypes.SWEET).toString() +
+                " pts."
+        data.playerMeatFish =
+                "x" +
+                model.getCardAmountOfType(FoodCardTypes.FISH).toString() +
+                "/" +
+                model.getCardAmountOfType(FoodCardTypes.MEAT).toString() +
+                "   " +
+                model.calculatePlayerTypeScore(FoodCardTypes.FISH).toString() +
+                " pts."
+        data.playerCereal =
+                "x" +
+                model.getCardAmountOfType(FoodCardTypes.CEREAL).toString() +
+                "   " +
+                model.calculatePlayerTypeScore(FoodCardTypes.CEREAL).toString() +
+                " pts."
+        data.playerTotal = model.calculatePlayerScore().toString()
+
+
+        data.iaApples =
+                "x" +
+                model.getIACardAmountOfType(FoodCardTypes.FRUIT).toString() +
+                "   " +
+                model.calculateAITypeScore(FoodCardTypes.FRUIT).toString() +
+                " pts."
+        data.iaOnion =
+                "x" +
+                model.getIACardAmountOfType(FoodCardTypes.VEGETABLE).toString() +
+                "   " +
+                model.calculateAITypeScore(FoodCardTypes.VEGETABLE).toString() +
+                " pts."
+        data.iaMilk =
+                "x" +
+                model.getIACardAmountOfType(FoodCardTypes.DAIRY).toString() +
+                "   " +
+                model.calculateAITypeScore(FoodCardTypes.DAIRY).toString() +
+                " pts."
+        data.iaDonut =
+                "x" +
+                model.getIACardAmountOfType(FoodCardTypes.SWEET).toString() +
+                "   " +
+                model.calculateAITypeScore(FoodCardTypes.SWEET).toString() +
+                " pts."
+        data.iaMeatFish =
+                "x" +
+                model.getIACardAmountOfType(FoodCardTypes.FISH).toString() +
+                "/" +
+                model.getIACardAmountOfType(FoodCardTypes.MEAT).toString() +
+                "   " +
+                model.calculateAITypeScore(FoodCardTypes.FISH).toString() +
+                " pts."
+        data.iaCereal =
+                "x" +
+                model.getIACardAmountOfType(FoodCardTypes.CEREAL).toString() +
+                "   " +
+                model.calculateAITypeScore(FoodCardTypes.CEREAL).toString() +
+                " pts."
+        data.iaTotal = model.calculateAIScore().toString()
+
+        val intent = Intent(this, EndActivity::class.java)
+        intent.putExtra("data", data)
+        startActivity(intent)
     }
 
     override fun onCardRewound() {
@@ -182,7 +277,7 @@ class MainActivity : AppCompatActivity(), CardStackListener {
                 window.clearFlags(WindowManager.LayoutParams.FLAG_NOT_TOUCHABLE)
             }, 300)
 
-        }, 600)
+        }, 900)
 
     }
 
@@ -339,6 +434,7 @@ class MainActivity : AppCompatActivity(), CardStackListener {
                 .calculatePlayerScore().toString()
         tv_aiScore.text = model
                 .calculateAIScore().toString()
+
     }
 
     fun setPlayerCardAmounts(){
